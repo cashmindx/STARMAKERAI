@@ -4,60 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STARMAKER AI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body><h2>🎬 Preview Scene</h2>
-<h2 style="text-align:center;">🎥 Choose Your Genre</h2>
-<div class="tabs">
-  <button onclick="playGenre('action')">Action</button>
-  <button onclick="playGenre('drama')">Drama</button>
-  <button onclick="playGenre('scifi')">Sci-Fi</button>
-</div>
 
-<div class="gallery">
-  <div class="genre-card">
-    <img id="genrePoster" src="/Videos/action.jpg" alt="Poster" />
-    <div class="play-overlay">▶</div>
-  </div>
-  <div class="video-box">
-    <video id="genrePlayer" width="100%" controls></video>
-  </div>
-</div>
-  <video width="100%" controls>
-  <source src="/Videos/epic-preview.mp4" type="video/mp4" />
-  Your browser doesn’t support video playback.
-</video>
-    <header>
-    <h1>STARMAKER AI</h1>
-    <p>Become the hero of your own cinematic adventure.</p>
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- PayPal Script -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1 style="text-align:center; font-family: 'Orbitron', sans-serif;">STARMAKER AI</h1>
+    <p style="text-align:center;">Become the hero of your own cinematic adventure.</p>
   </header>
 
-  <section class="main">
-    <div class="controls">
+  <!-- Preview Scene -->
+  <section>
+    <h2 style="text-align:center;">🎬 Preview Scene</h2>
+    <video width="100%" controls>
+      <source src="Videos/epic-preview.mp4" type="video/mp4" />
+      Your browser doesn’t support video playback.
+    </video>
+  </section>
+
+  <!-- Genre Selection -->
+  <section>
+    <h2 style="text-align:center;">🎥 Choose Your Genre</h2>
+    <div class="tabs" style="text-align:center; margin-bottom: 20px;">
+      <button onclick="playGenre('action')">Action</button>
+      <button onclick="playGenre('drama')">Drama</button>
+      <button onclick="playGenre('scifi')">Sci-Fi</button>
+    </div>
+
+    <div class="gallery" style="display:flex; justify-content:center; flex-wrap:wrap; gap: 20px;">
+      <div class="genre-card" style="position: relative;">
+        <img id="genrePoster" src="Videos/action.jpg" alt="Poster" width="300" />
+        <div class="play-overlay" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size: 3rem;">▶</div>
+      </div>
+
+      <div class="video-box" style="flex: 1 1 100%; margin-top: 20px;">
+        <video id="genrePlayer" width="100%" controls></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Movie Script Generator -->
+  <section class="main" style="padding: 20px;">
+    <h2>🎞️ Generate Your Movie Scene</h2>
+    <div class="controls" style="display:flex; flex-direction:column; gap:10px;">
       <input type="file" id="imageInput" accept="image/*" />
       <textarea id="promptInput" placeholder="Describe your movie scene..."></textarea>
       <select id="genreSelect">
         <option value="adventure">Adventure</option>
         <option value="sci-fi">Sci-Fi</option>
-        <option value="drama">Drama</option>
-        <option value="action">Action</option>
-      </select>
-      <button onclick="generateScript()">🎬 Generate Script</button>
-      <pre id="scriptOutput"></pre>
-    </div>
-  </section>
-
-  <section class="chatbot">
-    <h2>Ask the AI Director</h2>
-    <textarea id="chatInput" placeholder="Type your question or idea..."></textarea>
-    <button onclick="talkToAI()">🧠 Chat</button>
-    <pre id="chatOutput"></pre>
-  </section>
-
-  <div id="paypal-button-container"></div>
-
-  <script src="script.js"></script>
-</body>
-</html>
