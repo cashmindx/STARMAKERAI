@@ -4,80 +4,68 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STARMAKER AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: white;
+    }
 
-  <!-- Orbitron Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      padding: 20px;
+      background: linear-gradient(180deg, #000, #000);
+    }
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css" />
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      background: linear-gradient(to right, #ffc107, #ff5722);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
 
-  <!-- PayPal SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
-</head>
-<body>
+    .hero h2 {
+      margin-top: 10px;
+      font-size: 1.8rem;
+      color: #fff;
+    }
 
-  <header>
-    <h1>🎬 STARMAKER AI</h1>
-    <p>Become the hero of your own cinematic adventure.</p>
-  </header>
+    .hero p {
+      font-size: 1.2rem;
+      margin: 30px auto;
+      max-width: 700px;
+    }
 
-  <!-- Preview Video -->
-  <section>
-    <h2>🎬 Preview Scene</h2>
-    <video width="100%" controls>
-      <source src="assets/epic-preview.mp4" type="video/mp4" />
-      Your browser doesn’t support video playback.
-    </video>
-  </section>
+    .cta-button {
+      background-color: #ff7e00;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
 
-  <!-- Genre Selection -->
-  <section>
-    <h2>🎥 Choose Your Genre</h2>
-    <div class="tabs">
-      <button onclick="playGenre('action')">Action</button>
-      <button onclick="playGenre('drama')">Drama</button>
-      <button onclick="playGenre('scifi')">Sci-Fi</button>
-    </div>
+    .cta-button:hover {
+      background-color: #ff9900;
+    }
 
-    <div class="gallery">
-      <div class="genre-card">
-        <img id="genrePoster" src="assets/action.jpg" alt="Poster" />
-        <div class="play-overlay">▶</div>
-      </div>
-
-      <div class="video-box">
-        <video id="genrePlayer" controls></video>
-      </div>
-    </div>
-  </section>
-
-  <!-- Generate Script -->
-  <section class="main">
-    <h2>🎞️ Generate Your Movie Scene</h2>
-    <input type="file" id="imageInput" accept="image/*" />
-    <textarea id="promptInput" placeholder="Describe your movie scene..."></textarea>
-    <select id="genreSelect">
-      <option value="adventure">Adventure</option>
-      <option value="sci-fi">Sci-Fi</option>
-      <option value="drama">Drama</option>
-      <option value="action">Action</option>
-    </select>
-    <button onclick="generateScript()">🎬 Generate Script</button>
-    <pre id="scriptOutput"></pre>
-  </section>
-
-  <!-- Chat with AI -->
-  <section class="chatbot">
-    <h2>🧠 Ask the AI Director</h2>
-    <textarea id="chatInput" placeholder="Type your question or idea..."></textarea>
-    <button onclick="talkToAI()">Chat</button>
-    <pre id="chatOutput"></pre>
-  </section>
-
-  <!-- PayPal Button -->
-  <div id="paypal-button-container"></div>
-
-  <!-- Main Script -->
-  <script src="script.js"></script>
-</body>
-</html>
+    /* Next sections go here */
+    #app {
+      padding: 60px 20px;
+      background-color: #111;
+      color
