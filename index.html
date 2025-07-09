@@ -13,88 +13,6 @@
 
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
-
-  <style>
-    body {
-      font-family: 'Orbitron', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #fff;
-      color: #000;
-    }
-
-    header, section {
-      text-align: center;
-      padding: 20px;
-    }
-
-    .tabs button {
-      margin: 0 5px;
-      padding: 10px 15px;
-      font-weight: bold;
-    }
-
-    .gallery {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .genre-card {
-      position: relative;
-      margin-top: 20px;
-    }
-
-    .genre-card img {
-      width: 300px;
-      height: auto;
-      border-radius: 10px;
-    }
-
-    .play-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 3rem;
-      color: white;
-      pointer-events: none;
-    }
-
-    .video-box video {
-      width: 100%;
-      max-width: 600px;
-      margin-top: 20px;
-    }
-
-    textarea, select, input[type="file"] {
-      width: 90%;
-      max-width: 500px;
-      margin: 10px auto;
-      display: block;
-      padding: 10px;
-    }
-
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      font-weight: bold;
-    }
-
-    pre {
-      background: #f1f1f1;
-      padding: 10px;
-      text-align: left;
-      max-width: 700px;
-      margin: 0 auto;
-      white-space: pre-wrap;
-    }
-
-    #paypal-button-container {
-      margin-top: 30px;
-      text-align: center;
-    }
-  </style>
 </head>
 <body>
 
@@ -157,4 +75,9 @@
   </section>
 
   <!-- PayPal Button -->
-  <div id="paypal-bu
+  <div id="paypal-button-container"></div>
+
+  <!-- Main Script -->
+  <script src="script.js"></script>
+</body>
+</html>
