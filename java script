@@ -1,55 +1,45 @@
+// ========== 🎬 Generate Script ==========
 function generateScript() {
   const genre = document.getElementById("genreSelect").value;
   const prompt = document.getElementById("promptInput").value;
 
-  fetch("https://your-backend-url.com/api/generate-script", {
+  if (!prompt) {
+    document.getElementById("scriptOutput").innerText = "Please enter a movie scene description.";
+    return;
+  }
+
+  fetch("https://your-backend-url.com/api/generate-script", {  // ✅ Replace with your actual backend URL
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ genre, prompt })
   })
   .then(res => res.json())
   .then(data => {
-    document.getElementById("scriptOutput").innerText = data.script;
+    document.getElementById("scriptOutput").innerText = data.script || "No script received.";
   })
   .catch(err => {
-    document.getElementById("scriptOutput").innerText = "Error generating script.";
+    document.getElementById("scriptOutput").innerText = "❌ Error generating script.";
     console.error(err);
   });
 }
 
+// ========== 🤖 Chat with AI ==========
 function talkToAI() {
   const userMessage = document.getElementById("chatInput").value;
 
-  fetch("https://your-backend-url.com/api/chat", {
+  if (!userMessage) {
+    document.getElementById("chatOutput").innerText = "Please type a message.";
+    return;
+  }
+
+  fetch("https://your-backend-url.com/api/chat", {  // ✅ Replace with your actual backend URL
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message: userMessage })
   })
   .then(res => res.json())
   .then(data => {
-    document.getElementById("chatOutput").innerText = data.reply;
+    document.getElementById("chatOutput").innerText = data.reply || "No reply from AI.";
   })
   .catch(err => {
-    document.getElementById("chatOutput").innerText = "AI is busy filming...";
-    console.error(err);
-  });
-}
-
-paypal.Buttons({
-  createOrder: function(data, actions) {
-    return actions.order.create({
-      purchase_units: [{
-        amount: { value: '9.99' }
-      }]
-    });
-  },
-  onApprove: function(data, actions) {
-    return actions.order.capture().then(function(details) {
-      alert('Thanks for starring in your movie!');
-    });
-  }
-}).render('#paypal-button-container');
+    document
