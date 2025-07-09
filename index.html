@@ -9,7 +9,23 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body><h2>🎬 Preview Scene</h2>
-<video width="100%" controls>
+<h2 style="text-align:center;">🎥 Choose Your Genre</h2>
+<div class="tabs">
+  <button onclick="playGenre('action')">Action</button>
+  <button onclick="playGenre('drama')">Drama</button>
+  <button onclick="playGenre('scifi')">Sci-Fi</button>
+</div>
+
+<div class="gallery">
+  <div class="genre-card">
+    <img id="genrePoster" src="/Videos/action.jpg" alt="Poster" />
+    <div class="play-overlay">▶</div>
+  </div>
+  <div class="video-box">
+    <video id="genrePlayer" width="100%" controls></video>
+  </div>
+</div>
+  <video width="100%" controls>
   <source src="/Videos/epic-preview.mp4" type="video/mp4" />
   Your browser doesn’t support video playback.
 </video>
