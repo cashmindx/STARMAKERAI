@@ -5,59 +5,156 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STARMAKER AI</title>
 
-  <!-- Font -->
+  <!-- Orbitron Font -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- PayPal Script -->
+  <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
+
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #000;
+    }
+
+    header, section {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .tabs button {
+      margin: 0 5px;
+      padding: 10px 15px;
+      font-weight: bold;
+    }
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .genre-card {
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .genre-card img {
+      width: 300px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      color: white;
+      pointer-events: none;
+    }
+
+    .video-box video {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+    }
+
+    textarea, select, input[type="file"] {
+      width: 90%;
+      max-width: 500px;
+      margin: 10px auto;
+      display: block;
+      padding: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-weight: bold;
+    }
+
+    pre {
+      background: #f1f1f1;
+      padding: 10px;
+      text-align: left;
+      max-width: 700px;
+      margin: 0 auto;
+      white-space: pre-wrap;
+    }
+
+    #paypal-button-container {
+      margin-top: 30px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
-    <h1 style="text-align:center; font-family: 'Orbitron', sans-serif;">STARMAKER AI</h1>
-    <p style="text-align:center;">Become the hero of your own cinematic adventure.</p>
+    <h1>🎬 STARMAKER AI</h1>
+    <p>Become the hero of your own cinematic adventure.</p>
   </header>
 
-  <!-- Preview Scene -->
+  <!-- Preview Video -->
   <section>
-    <h2 style="text-align:center;">🎬 Preview Scene</h2>
+    <h2>🎬 Preview Scene</h2>
     <video width="100%" controls>
-      <source src="Videos/epic-preview.mp4" type="video/mp4" />
+      <source src="assets/epic-preview.mp4" type="video/mp4" />
       Your browser doesn’t support video playback.
     </video>
   </section>
 
   <!-- Genre Selection -->
   <section>
-    <h2 style="text-align:center;">🎥 Choose Your Genre</h2>
-    <div class="tabs" style="text-align:center; margin-bottom: 20px;">
+    <h2>🎥 Choose Your Genre</h2>
+    <div class="tabs">
       <button onclick="playGenre('action')">Action</button>
       <button onclick="playGenre('drama')">Drama</button>
       <button onclick="playGenre('scifi')">Sci-Fi</button>
     </div>
 
-    <div class="gallery" style="display:flex; justify-content:center; flex-wrap:wrap; gap: 20px;">
-      <div class="genre-card" style="position: relative;">
-        <img id="genrePoster" src="Videos/action.jpg" alt="Poster" width="300" />
-        <div class="play-overlay" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size: 3rem;">▶</div>
+    <div class="gallery">
+      <div class="genre-card">
+        <img id="genrePoster" src="assets/action.jpg" alt="Poster" />
+        <div class="play-overlay">▶</div>
       </div>
 
-      <div class="video-box" style="flex: 1 1 100%; margin-top: 20px;">
-        <video id="genrePlayer" width="100%" controls></video>
+      <div class="video-box">
+        <video id="genrePlayer" controls></video>
       </div>
     </div>
   </section>
 
-  <!-- Movie Script Generator -->
-  <section class="main" style="padding: 20px;">
+  <!-- Generate Script -->
+  <section class="main">
     <h2>🎞️ Generate Your Movie Scene</h2>
-    <div class="controls" style="display:flex; flex-direction:column; gap:10px;">
-      <input type="file" id="imageInput" accept="image/*" />
-      <textarea id="promptInput" placeholder="Describe your movie scene..."></textarea>
-      <select id="genreSelect">
-        <option value="adventure">Adventure</option>
-        <option value="sci-fi">Sci-Fi</option>
+    <input type="file" id="imageInput" accept="image/*" />
+    <textarea id="promptInput" placeholder="Describe your movie scene..."></textarea>
+    <select id="genreSelect">
+      <option value="adventure">Adventure</option>
+      <option value="sci-fi">Sci-Fi</option>
+      <option value="drama">Drama</option>
+      <option value="action">Action</option>
+    </select>
+    <button onclick="generateScript()">🎬 Generate Script</button>
+    <pre id="scriptOutput"></pre>
+  </section>
+
+  <!-- Chat with AI -->
+  <section class="chatbot">
+    <h2>🧠 Ask the AI Director</h2>
+    <textarea id="chatInput" placeholder="Type your question or idea..."></textarea>
+    <button onclick="talkToAI()">Chat</button>
+    <pre id="chatOutput"></pre>
+  </section>
+
+  <!-- PayPal Button -->
+  <div id="paypal-bu
