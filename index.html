@@ -2,83 +2,159 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>STARMAKER AI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STARMAKER AI — Become the Star of Your Own Movie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     body {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background-color: #111;
-      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      background: #0b0b0c;
+      color: #f2f2f2;
+      overflow-x: hidden;
     }
-
-    h1, h2 {
-      margin-bottom: 10px;
-    }
-
-    .hero {
-      background-color: #000;
+    header, section {
       padding: 80px 20px;
       text-align: center;
     }
-
-    .hero h1 {
-      font-size: 4rem;
-      color: orange;
+    h1, h2, h3 {
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
     }
-
-    .hero h2 {
-      font-size: 2rem;
+    h1 {
+      font-size: 3em;
+      color: #fff;
+    }
+    h2 {
+      color: #ff004f;
+    }
+    .btn {
+      background: #ff004f;
       color: white;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-
-    .cta-button {
-      background-color: orange;
-      color: black;
-      font-size: 1rem;
-      padding: 15px 30px;
       border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    section {
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .tabs button {
+      padding: 15px 25px;
       margin: 10px;
-      padding: 10px 20px;
-      font-weight: bold;
-      background: #444;
-      color: white;
-      border: none;
-      border-radius: 5px;
+      font-size: 1.1em;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: 0.3s ease;
     }
-
-    .genre-card img {
-      width: 300px;
-      border-radius: 10px;
-      margin-top: 20px;
+    .btn:hover {
+      background: #e60045;
     }
-
-    .video-box video {
+    .feature-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 30px;
+    }
+    .icon-block {
+      width: 180px;
+    }
+    .icon-block svg {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+      color: #ff004f;
+    }
+    footer {
+      padding: 30px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #aaa;
+      background: #121212;
+    }
+    .bg-video {
+      position: absolute;
+      top: 0; left: 0;
       width: 100%;
-      max-width: 600px;
-      margin-top: 20px;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.1;
+      z-index: -1;
     }
+  </style>
+</head>
 
-    textarea, select, input[type="file"] {
-      display: block;
-      margin: 10px auto;
-      padding: 10px;
+<body>
+
+  <!-- HERO -->
+  <header>
+    <h1>🎥 STARMAKER AI</h1>
+    <h2>Become the Star of Your Own Movie</h2>
+    <p>"Have you ever dreamed of being the hero in your own movie? Now you can."</p>
+    <div>
+      <button class="btn">📸 Upload Your Photo</button>
+      <button class="btn">🎤 Record Your Voice</button>
+      <button class="btn">🎞️ Choose Your Movie</button>
+    </div>
+  </header>
+
+  <!-- HOW IT WORKS -->
+  <section>
+    <h2>How It Works</h2>
+    <h3>Step 1: Upload Your Photos</h3>
+    <p>Snap or upload a few expressive photos — front, side, smiling.</p>
+
+    <h3>Step 2: Record Your Voice</h3>
+    <p>Say one line. Our AI clones your tone and emotion in seconds.</p>
+
+    <h3>Step 3: Choose Your Genre</h3>
+    <p>Action. Romance. Thriller. Comedy. Horror. You decide the story.</p>
+  </section>
+
+  <!-- AI MAGIC -->
+  <section>
+    <h2>AI Movie Magic</h2>
+    <p>Behind the scenes, Starmaker AI transforms your images into Hollywood-level movie scenes with real actors, face mapping, voice dubbing, and special effects.</p>
+  </section>
+
+  <!-- FEATURES -->
+  <section>
+    <h2>Bonus Features</h2>
+    <div class="feature-icons">
+      <div class="icon-block">
+        <i data-lucide="brain"></i>
+        <p>AI-Generated Movie Script</p>
+      </div>
+      <div class="icon-block">
+        <i data-lucide="users"></i>
+        <p>Choose AI Co-stars</p>
+      </div>
+      <div class="icon-block">
+        <i data-lucide="globe"></i>
+        <p>30+ Languages</p>
+      </div>
+      <div class="icon-block">
+        <i data-lucide="video"></i>
+        <p>4K Movie Quality</p>
+      </div>
+      <div class="icon-block">
+        <i data-lucide="palette"></i>
+        <p>Cinematic Mood Filters</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section>
+    <h2>Your Story Starts Now</h2>
+    <p>“The world’s waiting for your movie moment.”</p>
+    <button class="btn">🚀 Get Started Now</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    🌐 100% Secure | Powered by OpenAI + Sora | No Data Shared  
+    <br />Contact: info@starmakerai.com
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
