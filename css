@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: #0a0a0a;
+  color: white;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  padding: 60px 20px;
+  background: url('https://images.unsplash.com/photo-1542206395-9feb3edaa68f') center center/cover;
+  box-shadow: 0 0 30px #000;
+}
+
+header h1 {
+  font-size: 3em;
+  color: #00ffff;
+}
+
+.controls, .chatbot {
+  margin: 40px auto;
+  max-width: 600px;
+  background: #111;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #222;
+}
+
+textarea, select, input[type="file"], button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+button {
+  background: #00ffff;
+  color: #000;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00cccc;
+}
+
+pre {
+  background: #222;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
