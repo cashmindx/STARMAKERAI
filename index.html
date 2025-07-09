@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starmaker AI - Be the Star</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <script src="https://www.paypal.com/sdk/js?client-id=VITE_PAYPAL_CLIENT_ID"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(120deg, #000000, #1a1a1a);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: url('https://images.unsplash.com/photo-1542206395-9feb3edaa68f') no-repeat center center/cover;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 3.5em;
+      color: #fff;
+      text-shadow: 0 0 15px #f00;
+    }
+
+    header p {
+      font-size: 1.3em;
+      max-width: 600px;
+      margin: 20px auto;
+      color: #ddd;
+    }
+
+    .section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+
+    .step {
+      background: #111;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #333;
+    }
+
+    .step h3 {
+      color: #00ffff;
+      margin-bottom: 10px;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 40px 20px;
+      background: #111;
+    }
+
+    .cta button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      background: #00ffff;
+      color: #000;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .cta button:hover {
+      background: #00cccc;
+    }
+
+    .features ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .features li {
+      background: #222;
+      padding: 15px;
+      margin: 10px 0;
+      border-left: 5px solid #00ffff;
+    }
+
+    .upload-section {
+      margin: 40px auto;
+      max-width: 600px;
+      background: #222;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #333;
+      text-align: center;
+    }
+
+    input[type="file"], select, button, textarea {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+    }
+
+    /* 🔥 Glowing Cursor */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      color: cyan;
+      text-shadow: 0 0 10px cyan, 0 0 20px cyan;
+      z-index: 9999;
+      transition: transform 0.05s ease-out;
+    }
+
+    @media (max-width: 768px) {
+      .custom-cursor {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>STARMAKER AI</h1>
+    <p>Become the main actor in your own movie with Hollywood-level visuals and real human avatars.</p>
+  </header>
+
+  <div class="section">
+    <h2 style="text-align:center; color:#00ffff;">How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>1. Upload Your Photos</h3>
+        <p>Snap or upload selfies – front, side, or expressive angles.</p>
+      </div>
+      <div class="step">
+        <h3>2. Record Your Voice</h3>
+        <p>Say a short line (7 seconds). Our AI clones your tone & emotion.</p>
+      </div>
+      <div class="step">
+        <h3>3. Choose Your Genre</h3>
+        <p>Action, Horror, Comedy, Adventure, Sci-Fi, Drama… You decide.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="upload-section">
+    <h3>🎤 Record Your Voice</h3>
+    <button onclick="startRecording()">Start Recording</button>
+    <p id="recordingStatus">Not recording...</p>
+
+    <h3>📸 Upload Image</h3>
+    <input type="file" id="imageInput" accept="image/*" />
+
+    <h3>🎬 Choose Genre</h3>
+    <select id="genreSelect">
+      <option value="action">Action</option>
+      <option value="comedy">Comedy</option>
+      <option value="drama">Drama</option>
+      <option value="horror">Horror</option>
+      <option value="sci-fi">Sci-Fi</option>
+    </select>
+
+    <h3>📝 Prompt</h3>
+    <textarea id="promptInput" rows="4" placeholder="Type your custom movie idea or character intro..."></textarea>
+    <button onclick="generateScript()">🎬 Generate Script</button>
+    <pre id="scriptOutput" style="margin-top:20px; text-align:left; white-space:pre-wrap;"></pre>
+  </div>
+
+  <div class="section features">
+    <h2 style="text-align:center; color:#00ffff;">Epic Features</h2>
+    <ul>
+      <li>🎬 Real-time AI editing with cinematic effects</li>
+      <li>🎭 Choose from 100+ lifelike AI avatars as co-stars</li>
+      <li>🌍 Multilingual dubbing – 30+ languages supported</li>
+      <li>🎨 Mood filters: Noir, 80s Retro, Futuristic, and more</li>
+      <li>📤 Export and share on TikTok, Instagram, YouTube</li>
+    </ul>
+  </div>
+
+  <div class="cta">
+    <h2>Ready to Star in Your Movie?</h2>
+    <div id="paypal-button-container"></div>
+    <p style="color:#aaa; font-size:0.9em; margin-top:20px;">Your payment unlocks your custom movie scene.</p>
+  </div>
+
+  <script>
+    // Cursor effect
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    cursor.innerText = 'STARMAKER AI';
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.transform = `translate(${e.clientX + 15}px, ${e.clientY + 15}px)`;
+    });
+
+    // Voice recording
+    let mediaRecorder;
+    let audioChunks = [];
+
+    function startRecording() {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+        document.getElementById('recordingStatus').innerText = 'Recording...';
+
+        mediaRecorder.ondataavailable = event => {
+          audioChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          const audioURL = URL.createObjectURL(audioBlob);
+          console.log("Voice recorded at:", audioURL);
+        };
+
+        setTimeout(() => {
+          mediaRecorder.stop();
+          document.getElementById('recordingStatus').innerText = 'Recording complete!';
+        }, 7000);
+      });
+    }
+
+    // Generate script
+    function generateScript() {
+      const genre = document.getElementById("genreSelect").value;
+      const prompt = document.getElementById("promptInput").value;
+
+      fetch("https://starmaker-backend.onrender.com/api/generate-movie-script", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ genre, userPrompt: prompt })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("scriptOutput").innerText = data.script;
+      })
+      .catch(err => {
+        document.getElementById("scriptOutput").innerText = "Error generating script.";
+        console.error(err);
+      });
+    }
+
+    // PayPal
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{ amount: { value: '9.99' } }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('Transaction completed by ' + details.payer.name.given_name);
+        });
+      }
+    }).render('#paypal-button-container');
+  </script>
+</body>
+</html>
