@@ -15,9 +15,12 @@ class StarmakerAI {
     
     // AI Service integration
     this.aiService = new AIService();
+    this.videoService = new VideoService();
+    this.paymentService = new PaymentService();
     this.voiceId = null;
     this.generatedScript = null;
     this.movieProgress = 0;
+    this.currentPlan = null;
     
     this.init();
   }
@@ -29,6 +32,8 @@ class StarmakerAI {
     this.setupSmoothScrolling();
     this.setupIntersectionObserver();
     this.initializeAIService();
+    this.initializeVideoService();
+    this.initializePaymentService();
   }
 
   setupEventListeners() {
@@ -154,6 +159,11 @@ class StarmakerAI {
     // AI Progress events
     document.addEventListener('aiProgress', (e) => {
       this.updateMovieProgress(e.detail);
+    });
+
+    // Video Progress events
+    document.addEventListener('videoProgress', (e) => {
+      this.updateVideoProgress(e.detail);
     });
   }
 
@@ -518,6 +528,31 @@ class StarmakerAI {
     }
   }
 
+  async initializeVideoService() {
+    // Check for stored video API keys
+    const runwayKey = localStorage.getItem('runway_api_key');
+    const pikaKey = localStorage.getItem('pika_api_key');
+    
+    if (runwayKey || pikaKey) {
+      await this.videoService.initialize(runwayKey, pikaKey);
+      this.showNotification('Video generation services connected!', 'success');
+    } else {
+      this.showNotification('Video generation in simulation mode. Add API keys for real video generation.', 'info');
+    }
+  }
+
+  async initializePaymentService() {
+    // Check for stored Stripe key
+    const stripeKey = localStorage.getItem('stripe_publishable_key');
+    
+    if (stripeKey) {
+      await this.paymentService.initialize(stripeKey);
+      this.showNotification('Payment services connected!', 'success');
+    } else {
+      this.showNotification('Payment services in simulation mode. Add Stripe key for real payments.', 'info');
+    }
+  }
+
   async generateMovie() {
     if (this.uploadedPhotos.length === 0) {
       this.showNotification('Please upload at least one photo', 'warning');
@@ -526,6 +561,13 @@ class StarmakerAI {
 
     if (!this.recordedAudio) {
       this.showNotification('Please record your voice', 'warning');
+      return;
+    }
+
+    // Check if user has active subscription or needs to pay
+    const subscription = await this.paymentService.getActiveSubscription();
+    if (!subscription || subscription.status !== 'active') {
+      this.showPlanSelection();
       return;
     }
 
@@ -554,16 +596,34 @@ class StarmakerAI {
         'confident and engaging'
       );
       
-      // Step 4: Generate movie
-      this.showNotification('Creating your movie...', 'info');
-      const movieData = await this.aiService.generateMovie(
+      // Step 4: Generate voice audio
+      this.showNotification('Generating voice audio...', 'info');
+      const voiceAudio = await this.aiService.generateVoiceAudio(
         this.generatedScript,
-        this.voiceId,
-        this.uploadedPhotos
+        this.voiceId
       );
+
+      // Step 5: Generate video
+      this.showNotification('Generating video scenes...', 'info');
+      const videoSettings = {
+        duration: this.getPlanVideoDuration(subscription.planId),
+        style: 'cinematic',
+        genre: this.movieSettings.genre
+      };
+
+      const videoResult = await this.videoService.generateVideo(
+        this.generatedScript,
+        this.uploadedPhotos,
+        voiceAudio,
+        videoSettings
+      );
+
+      if (!videoResult || videoResult.status === 'failed') {
+        throw new Error('Failed to generate video');
+      }
       
-      // Step 5: Display results
-      this.showGeneratedMovie(movieData);
+      // Step 6: Display results
+      this.showGeneratedMovie(videoResult);
       this.showNotification('Your movie is ready!', 'success');
       
     } catch (error) {
@@ -590,6 +650,115 @@ class StarmakerAI {
     if (statusText) {
       statusText.textContent = `Generating: ${data.progress}%`;
     }
+  }
+
+  updateVideoProgress(data) {
+    // Update video generation progress
+    const videoProgressBar = document.querySelector('.video-progress-bar');
+    if (videoProgressBar) {
+      videoProgressBar.style.width = `${data.progress}%`;
+    }
+    
+    const videoStatusText = document.querySelector('.video-status');
+    if (videoStatusText) {
+      videoStatusText.textContent = `Video: ${data.progress}%`;
+    }
+  }
+
+  showPlanSelection() {
+    const content = `
+      <div class="plan-selection">
+        <h4>Choose Your Plan</h4>
+        <p>Select a plan to start creating your AI movie:</p>
+        
+        <div class="plan-cards">
+          ${Object.entries(this.paymentService.subscriptionPlans).map(([key, plan]) => `
+            <div class="plan-card" onclick="app.selectPlan('${key}')">
+              <h5>${plan.name}</h5>
+              <div class="plan-price">$${plan.price}</div>
+              <ul class="plan-features">
+                ${plan.features.map(feature => `<li>${feature}</li>`).join('')}
+              </ul>
+              <button class="btn btn-primary">Select ${plan.name}</button>
+            </div>
+          `).join('')}
+        </div>
+        
+        <div class="plan-info">
+          <p><i data-lucide="info"></i> All plans include one-time payment for movie generation</p>
+        </div>
+      </div>
+    `;
+    
+    this.showModal('Choose Plan', content);
+    this.initializeLucideIcons();
+  }
+
+  async selectPlan(planId) {
+    try {
+      const plan = this.paymentService.subscriptionPlans[planId];
+      if (!plan) {
+        throw new Error('Invalid plan selected');
+      }
+
+      // Show payment modal
+      await this.paymentService.showPaymentModal(planId, {
+        genre: this.movieSettings.genre,
+        duration: this.movieSettings.duration,
+        photoCount: this.uploadedPhotos.length
+      });
+
+    } catch (error) {
+      console.error('Plan selection error:', error);
+      this.showNotification('Failed to process plan selection', 'error');
+    }
+  }
+
+  async processPayment(planId) {
+    try {
+      const plan = this.paymentService.subscriptionPlans[planId];
+      if (!plan) {
+        throw new Error('Invalid plan selected');
+      }
+
+      // Create payment intent
+      const paymentIntent = await this.paymentService.createPaymentIntent(planId, {
+        genre: this.movieSettings.genre,
+        duration: this.movieSettings.duration,
+        photoCount: this.uploadedPhotos.length
+      });
+
+      // Process payment (simulated for demo)
+      const paymentResult = await this.paymentService.processPayment(
+        paymentIntent.clientSecret,
+        { card: { last4: '4242' } } // Simulated payment method
+      );
+
+      if (paymentResult.success) {
+        this.hideModal();
+        this.showNotification('Payment successful! Starting movie generation...', 'success');
+        
+        // Start movie generation
+        setTimeout(() => {
+          this.generateMovie();
+        }, 1000);
+      } else {
+        throw new Error(paymentResult.error || 'Payment failed');
+      }
+
+    } catch (error) {
+      console.error('Payment processing error:', error);
+      this.showNotification('Payment failed. Please try again.', 'error');
+    }
+  }
+
+  getPlanVideoDuration(planId) {
+    const durations = {
+      starter: 60, // 1 minute
+      pro: 300,    // 5 minutes
+      studio: 600  // 10 minutes
+    };
+    return durations[planId] || 60;
   }
 
   showGeneratedMovie(movieData) {
@@ -627,13 +796,33 @@ class StarmakerAI {
           <small>Get your key from <a href="https://elevenlabs.io/" target="_blank">ElevenLabs</a></small>
         </div>
         
+        <div class="api-key-input">
+          <label>RunwayML API Key (Optional):</label>
+          <input type="password" id="runwayKey" placeholder="..." />
+          <small>Get your key from <a href="https://runwayml.com/" target="_blank">RunwayML</a></small>
+        </div>
+        
+        <div class="api-key-input">
+          <label>Pika Labs API Key (Optional):</label>
+          <input type="password" id="pikaKey" placeholder="..." />
+          <small>Get your key from <a href="https://pika.art/" target="_blank">Pika Labs</a></small>
+        </div>
+        
+        <div class="api-key-input">
+          <label>Stripe Publishable Key (Optional):</label>
+          <input type="password" id="stripeKey" placeholder="pk_..." />
+          <small>Get your key from <a href="https://dashboard.stripe.com/apikeys" target="_blank">Stripe Dashboard</a></small>
+        </div>
+        
         <div class="api-actions">
           <button class="btn btn-primary" onclick="app.saveAPIKeys()">Save Keys</button>
           <button class="btn btn-secondary" onclick="app.testAIConnection()">Test Connection</button>
         </div>
         
         <div class="ai-status">
-          <p><strong>Status:</strong> <span id="aiStatus">${this.aiService.isConfigured ? 'Connected' : 'Simulation Mode'}</span></p>
+          <p><strong>AI Status:</strong> <span id="aiStatus">${this.aiService.isConfigured ? 'Connected' : 'Simulation Mode'}</span></p>
+          <p><strong>Video Status:</strong> <span id="videoStatus">${this.videoService.isConfigured ? 'Connected' : 'Simulation Mode'}</span></p>
+          <p><strong>Payment Status:</strong> <span id="paymentStatus">${this.paymentService.isConfigured ? 'Connected' : 'Simulation Mode'}</span></p>
         </div>
       </div>
     `;
@@ -644,23 +833,40 @@ class StarmakerAI {
   async saveAPIKeys() {
     const openaiKey = document.getElementById('openaiKey').value;
     const elevenLabsKey = document.getElementById('elevenLabsKey').value;
+    const runwayKey = document.getElementById('runwayKey').value;
+    const pikaKey = document.getElementById('pikaKey').value;
+    const stripeKey = document.getElementById('stripeKey').value;
     
     if (!openaiKey || !elevenLabsKey) {
-      this.showNotification('Please enter both API keys', 'warning');
+      this.showNotification('Please enter OpenAI and ElevenLabs API keys', 'warning');
       return;
     }
     
     // Save to localStorage
     localStorage.setItem('openai_api_key', openaiKey);
     localStorage.setItem('elevenlabs_api_key', elevenLabsKey);
+    localStorage.setItem('runway_api_key', runwayKey);
+    localStorage.setItem('pika_api_key', pikaKey);
+    localStorage.setItem('stripe_publishable_key', stripeKey);
     
-    // Initialize AI service
+    // Initialize services
     await this.aiService.initialize(openaiKey, elevenLabsKey);
+    await this.videoService.initialize(runwayKey, pikaKey);
+    await this.paymentService.initialize(stripeKey);
     
     // Update status
-    const statusElement = document.getElementById('aiStatus');
-    if (statusElement) {
-      statusElement.textContent = this.aiService.isConfigured ? 'Connected' : 'Simulation Mode';
+    const aiStatusElement = document.getElementById('aiStatus');
+    const videoStatusElement = document.getElementById('videoStatus');
+    const paymentStatusElement = document.getElementById('paymentStatus');
+    
+    if (aiStatusElement) {
+      aiStatusElement.textContent = this.aiService.isConfigured ? 'Connected' : 'Simulation Mode';
+    }
+    if (videoStatusElement) {
+      videoStatusElement.textContent = this.videoService.isConfigured ? 'Connected' : 'Simulation Mode';
+    }
+    if (paymentStatusElement) {
+      paymentStatusElement.textContent = this.paymentService.isConfigured ? 'Connected' : 'Simulation Mode';
     }
     
     this.showNotification('API keys saved successfully!', 'success');
