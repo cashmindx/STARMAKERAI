@@ -29,13 +29,17 @@
         <span class="logo-icon">🎬</span>
         <span class="logo-text">STARMAKER AI</span>
       </div>
-      <div class="nav-menu">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#how-it-works" class="nav-link">How It Works</a>
-        <a href="#features" class="nav-link">Features</a>
-        <a href="#pricing" class="nav-link">Pricing</a>
-        <button class="nav-cta">Get Started</button>
-      </div>
+              <div class="nav-menu">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#how-it-works" class="nav-link">How It Works</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#pricing" class="nav-link">Pricing</a>
+          <button class="nav-cta">Get Started</button>
+          <button class="nav-ai-settings" onclick="app.showAISettings()">
+            <i data-lucide="settings"></i>
+            AI Settings
+          </button>
+        </div>
       <div class="nav-toggle">
         <i data-lucide="menu"></i>
       </div>
@@ -461,6 +465,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="javascript/ai-service.js"></script>
   <script src="javascript/app.js"></script>
 </body>
 </html>

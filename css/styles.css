@@ -284,6 +284,26 @@ p {
   box-shadow: var(--shadow-medium);
 }
 
+.nav-ai-settings {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.nav-ai-settings:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
 .nav-toggle {
   display: none;
   cursor: pointer;
@@ -1026,6 +1046,96 @@ p {
 
 .modal-body {
   padding: 1.5rem;
+}
+
+/* AI Settings Styles */
+.ai-settings {
+  max-width: 500px;
+}
+
+.ai-settings h4 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.api-key-input {
+  margin-bottom: 1.5rem;
+}
+
+.api-key-input label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.api-key-input input {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--background-dark);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.api-key-input input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.api-key-input small {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.api-key-input small a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.api-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ai-status {
+  padding: 1rem;
+  background: var(--background-dark);
+  border-radius: var(--border-radius-small);
+  border: 1px solid var(--border-color);
+}
+
+.ai-status p {
+  margin: 0;
+}
+
+.ai-status span {
+  color: var(--success-color);
+}
+
+/* Movie Progress Styles */
+.movie-progress-container {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--background-dark);
+  border-radius: var(--border-radius-small);
+}
+
+.movie-progress-bar {
+  width: 0%;
+  height: 4px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.movie-status {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 }
 
 /* Animations */

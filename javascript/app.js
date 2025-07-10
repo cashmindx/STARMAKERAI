@@ -13,6 +13,12 @@ class StarmakerAI {
       style: 'modern'
     };
     
+    // AI Service integration
+    this.aiService = new AIService();
+    this.voiceId = null;
+    this.generatedScript = null;
+    this.movieProgress = 0;
+    
     this.init();
   }
 
@@ -22,6 +28,7 @@ class StarmakerAI {
     this.showLoadingScreen();
     this.setupSmoothScrolling();
     this.setupIntersectionObserver();
+    this.initializeAIService();
   }
 
   setupEventListeners() {
@@ -142,6 +149,11 @@ class StarmakerAI {
       if (e.key === 'Escape') {
         this.hideModal();
       }
+    });
+
+    // AI Progress events
+    document.addEventListener('aiProgress', (e) => {
+      this.updateMovieProgress(e.detail);
     });
   }
 
@@ -489,6 +501,177 @@ class StarmakerAI {
     const navMenu = document.querySelector('.nav-menu');
     if (navMenu) {
       navMenu.classList.toggle('active');
+    }
+  }
+
+  // AI Service Methods
+  async initializeAIService() {
+    // Check for stored API keys
+    const openaiKey = localStorage.getItem('openai_api_key');
+    const elevenLabsKey = localStorage.getItem('elevenlabs_api_key');
+    
+    if (openaiKey && elevenLabsKey) {
+      await this.aiService.initialize(openaiKey, elevenLabsKey);
+      this.showNotification('AI services connected successfully!', 'success');
+    } else {
+      this.showNotification('AI services in simulation mode. Add API keys for full functionality.', 'info');
+    }
+  }
+
+  async generateMovie() {
+    if (this.uploadedPhotos.length === 0) {
+      this.showNotification('Please upload at least one photo', 'warning');
+      return;
+    }
+
+    if (!this.recordedAudio) {
+      this.showNotification('Please record your voice', 'warning');
+      return;
+    }
+
+    const generateBtn = document.getElementById('generateMovieBtn');
+    const originalText = generateBtn.innerHTML;
+    
+    generateBtn.innerHTML = '<i data-lucide="loader-2"></i> Generating...';
+    generateBtn.disabled = true;
+    this.initializeLucideIcons();
+
+    try {
+      // Step 1: Analyze photos
+      this.showNotification('Analyzing photos...', 'info');
+      const photoAnalysis = await this.aiService.analyzePhotos(this.uploadedPhotos);
+      
+      // Step 2: Clone voice
+      this.showNotification('Cloning voice...', 'info');
+      const voiceClone = await this.aiService.cloneVoice(this.recordedAudio);
+      this.voiceId = voiceClone.voiceId;
+      
+      // Step 3: Generate script
+      this.showNotification('Generating script...', 'info');
+      this.generatedScript = await this.aiService.generateScript(
+        this.movieSettings.genre,
+        parseInt(this.movieSettings.duration),
+        'confident and engaging'
+      );
+      
+      // Step 4: Generate movie
+      this.showNotification('Creating your movie...', 'info');
+      const movieData = await this.aiService.generateMovie(
+        this.generatedScript,
+        this.voiceId,
+        this.uploadedPhotos
+      );
+      
+      // Step 5: Display results
+      this.showGeneratedMovie(movieData);
+      this.showNotification('Your movie is ready!', 'success');
+      
+    } catch (error) {
+      console.error('Movie generation error:', error);
+      this.showNotification('Movie generation failed. Please try again.', 'error');
+    } finally {
+      generateBtn.innerHTML = originalText;
+      generateBtn.disabled = false;
+      this.initializeLucideIcons();
+    }
+  }
+
+  updateMovieProgress(data) {
+    this.movieProgress = data.progress;
+    
+    // Update progress bar if it exists
+    const progressBar = document.querySelector('.movie-progress-bar');
+    if (progressBar) {
+      progressBar.style.width = `${data.progress}%`;
+    }
+    
+    // Update status text
+    const statusText = document.querySelector('.movie-status');
+    if (statusText) {
+      statusText.textContent = `Generating: ${data.progress}%`;
+    }
+  }
+
+  showGeneratedMovie(movieData) {
+    const previewPlaceholder = document.getElementById('previewPlaceholder');
+    const moviePreview = document.getElementById('moviePreview');
+
+    if (previewPlaceholder && moviePreview) {
+      moviePreview.src = movieData.videoUrl;
+      moviePreview.style.display = 'block';
+      previewPlaceholder.style.display = 'none';
+
+      // Update movie info
+      const movieInfo = document.querySelector('.movie-info h3');
+      if (movieInfo) {
+        movieInfo.textContent = movieData.title;
+      }
+    }
+  }
+
+  showAISettings() {
+    const content = `
+      <div class="ai-settings">
+        <h4>AI Service Configuration</h4>
+        <p>Add your API keys to enable real AI functionality:</p>
+        
+        <div class="api-key-input">
+          <label>OpenAI API Key:</label>
+          <input type="password" id="openaiKey" placeholder="sk-..." />
+          <small>Get your key from <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a></small>
+        </div>
+        
+        <div class="api-key-input">
+          <label>ElevenLabs API Key:</label>
+          <input type="password" id="elevenLabsKey" placeholder="..." />
+          <small>Get your key from <a href="https://elevenlabs.io/" target="_blank">ElevenLabs</a></small>
+        </div>
+        
+        <div class="api-actions">
+          <button class="btn btn-primary" onclick="app.saveAPIKeys()">Save Keys</button>
+          <button class="btn btn-secondary" onclick="app.testAIConnection()">Test Connection</button>
+        </div>
+        
+        <div class="ai-status">
+          <p><strong>Status:</strong> <span id="aiStatus">${this.aiService.isConfigured ? 'Connected' : 'Simulation Mode'}</span></p>
+        </div>
+      </div>
+    `;
+    
+    this.showModal('AI Settings', content);
+  }
+
+  async saveAPIKeys() {
+    const openaiKey = document.getElementById('openaiKey').value;
+    const elevenLabsKey = document.getElementById('elevenLabsKey').value;
+    
+    if (!openaiKey || !elevenLabsKey) {
+      this.showNotification('Please enter both API keys', 'warning');
+      return;
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('openai_api_key', openaiKey);
+    localStorage.setItem('elevenlabs_api_key', elevenLabsKey);
+    
+    // Initialize AI service
+    await this.aiService.initialize(openaiKey, elevenLabsKey);
+    
+    // Update status
+    const statusElement = document.getElementById('aiStatus');
+    if (statusElement) {
+      statusElement.textContent = this.aiService.isConfigured ? 'Connected' : 'Simulation Mode';
+    }
+    
+    this.showNotification('API keys saved successfully!', 'success');
+  }
+
+  async testAIConnection() {
+    try {
+      const testScript = await this.aiService.generateScript('action', 30);
+      this.showNotification('AI connection test successful!', 'success');
+    } catch (error) {
+      this.showNotification('AI connection test failed. Check your API keys.', 'error');
     }
   }
 
