@@ -7,36 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    .gallery-section .image-row,
-    .gallery-section .video-row {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-      justify-content: center;
-    }
-    .gallery-section img,
-    .gallery-section video {
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 320px;
-      width: 100%;
-      height: auto;
-      background: #eee;
-    }
-    .uploaded-photos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .uploaded-photos img {
-      max-width: 120px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-  </style>
 </head>
 
 <body>
@@ -135,21 +105,29 @@
       <div class="media-gallery">
         <h3>Images</h3>
         <div class="image-row">
-          <img src="images/photo1.jpg" alt="Photo 1" width="300">
-          <img src="images/photo2.jpg" alt="Photo 2" width="300">
-          <!-- Add more images as needed -->
+          <img src="Videos/comedy.png" alt="Comedy Poster" width="200">
+          <img src="Videos/horror.png" alt="Horror Poster" width="200">
+          <img src="Videos/romance.png" alt="Romance Poster" width="200">
+          <img src="Videos/scifi.png" alt="Sci-Fi Poster" width="200">
         </div>
         <h3>Videos</h3>
         <div class="video-row">
           <video width="320" controls>
-            <source src="videos/movie1.mp4" type="video/mp4">
+            <source src="Videos/adventure-movie.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
           <video width="320" controls>
-            <source src="videos/movie2.mp4" type="video/mp4">
+            <source src="Videos/horror-movie.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-          <!-- Add more videos as needed -->
+          <video width="320" controls>
+            <source src="Videos/romance.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <video width="320" controls>
+            <source src="Videos/scifi.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </div>
@@ -514,20 +492,4 @@
     <div class="modal-content">
       <div class="modal-header">
         <h3 id="modalTitle">Welcome to STARMAKER AI</h3>
-        <button class="modal-close" id="modalClose">
-          <i data-lucide="x"></i>
-        </button>
-      </div>
-      <div class="modal-body" id="modalBody">
-        <!-- Modal content will be dynamically inserted -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script src="javascript/ai-service.js"></script>
-  <script src="javascript/video-service.js"></script>
-  <script src="javascript/payment-service.js"></script>
-  <script src="javascript/app.js"></script>
-</body>
-</html>
+       
