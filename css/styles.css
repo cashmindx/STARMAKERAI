@@ -109,152 +109,171 @@ body {
   margin-bottom: 28px;
 }
 .hero-actions {
-  display:
-Absolutely! Here are the full old versions of both your index.html and styles.css before the modern movie-studio effects and advanced tweaks.
+  display: flex;
+  gap: 16px;
+}
+.btn {
+  padding: 12px 28px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary {
+  background: #ffb347;
+  color: #181c24;
+}
+.btn-primary:hover {
+  background: #ffd580;
+}
+.btn-secondary {
+  background: #fff;
+  color: #181c24;
+  border: 1px solid #ffb347;
+}
+.btn-secondary:hover {
+  background: #ffb347;
+  color: #181c24;
+}
+.btn-large {
+  font-size: 1.2rem;
+  padding: 16px 36px;
+}
 
-Old index.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>STARMAKER AI — Become the Star of Your Own Movie</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
+/* Gallery Section Styles */
+.gallery-section .image-row,
+.gallery-section .video-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.gallery-section img,
+.gallery-section video {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  background: #eee;
+}
+.gallery-section h3 {
+  margin-top: 30px;
+}
 
-<body>
-  <!-- Loading Screen -->
-  <div id="loadingScreen" class="loading-screen">
-    <div class="loading-content">
-      <div class="loading-logo">🎬</div>
-      <h2>STARMAKER AI</h2>
-      <div class="loading-bar">
-        <div class="loading-progress"></div>
-      </div>
-      <p>Initializing AI Movie Studio...</p>
-    </div>
-  </div>
+/* Section headers */
+.section-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.section-header h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #181c24;
+  margin-bottom: 8px;
+}
+.section-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-logo">
-        <span class="logo-icon">🎬</span>
-        <span class="logo-text">STARMAKER AI</span>
-      </div>
-      <div class="nav-menu">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#how-it-works" class="nav-link">How It Works</a>
-        <a href="#features" class="nav-link">Features</a>
-        <a href="#pricing" class="nav-link">Pricing</a>
-        <button class="nav-cta">Get Started</button>
-        <button class="nav-ai-settings" onclick="app.showAISettings()">
-          <i data-lucide="settings"></i>
-          AI Settings
-        </button>
-      </div>
-      <div class="nav-toggle">
-        <i data-lucide="menu"></i>
-      </div>
-    </div>
-  </nav>
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="hero-background">
-      <div class="hero-particles"></div>
-      <video class="hero-video" autoplay muted loop>
-        <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1 class="hero-title">
-          <span class="title-line">Become the Star</span>
-          <span class="title-line">of Your Own Movie</span>
-        </h1>
-        <p class="hero-subtitle">Transform your photos and voice into a Hollywood-worthy film with AI-powered movie magic</p>
-        <div class="hero-actions">
-          <button class="btn btn-primary" id="startJourneyBtn">
-            <i data-lucide="play"></i>
-            Start Your Journey
-          </button>
-          <button class="btn btn-secondary" id="watchDemoBtn">
-            <i data-lucide="video"></i>
-            Watch Demo
-          </button>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="movie-preview">
-          <div class="preview-screen">
-            <div class="preview-content">
-              <div class="actor-placeholder">
-                <i data-lucide="user"></i>
-              </div>
-              <div class="movie-info">
-                <h3>Your Movie Title</h3>
-                <p>Action • Adventure • 2024</p>
-              </div>
-            </div>
-          </div>
-          <div class="preview-controls">
-            <button class="control-btn"><i data-lucide="play"></i></button>
-            <button class="control-btn"><i data-lucide="volume-2"></i></button>
-            <button class="control-btn"><i data-lucide="maximize"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+/* Footer */
+.footer {
+  background: #181c24;
+  color: #fff;
+  padding: 40px 0 20px 0;
+}
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 20px auto;
+  padding: 0 24px;
+}
+.footer-section {
+  flex: 1 1 180px;
+  min-width: 180px;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.footer-section h4 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #ffb347;
+}
+.footer-section ul {
+  list-style: none;
+}
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+.footer-section ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-section ul li a:hover {
+  color: #ffb347;
+}
+.social-links {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+}
+.social-links a {
+  color: #fff;
+  font-size: 1.3rem;
+  transition: color 0.2s;
+}
+.social-links a:hover {
+  color: #ffb347;
+}
+.footer-bottom {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.95rem;
+  margin-top: 20px;
+}
 
-  <!-- Gallery Section -->
-  <section id="gallery" class="gallery-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Gallery</h2>
-        <p>Check out our images and videos!</p>
-      </div>
-      <div class="media-gallery">
-        <h3>Images</h3>
-        <div class="image-row">
-          <img src="Videos/comedy.png" alt="Comedy Poster" width="300">
-          <img src="Videos/horror.png" alt="Horror Poster" width="300">
-          <img src="Videos/romance.png" alt="Romance Poster" width="300">
-          <img src="Videos/scifi.png" alt="Sci-Fi Poster" width="300">
-        </div>
-        <h3>Videos</h3>
-        <div class="video-row">
-          <video width="320" controls>
-            <source src="Videos/adventure-movie.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <video width="320" controls>
-            <source src="Videos/horror-movie.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <video width="320" controls>
-            <source src="Videos/romance.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <video width="320" controls>
-            <source src="Videos/scifi.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How It Works Section -->
-  <!-- ... (rest of your sections remain unchanged) ... -->
-
-  <!-- Scripts -->
-  <script src="javascript/ai-service.js"></script>
-  <script src="javascript/video-service.js"></script>
-  <script src="javascript/payment-service.js"></script>
-  <script src="javascript/app.js"></script>
-</body>
-</html>
+/* Responsive Design */
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+  .footer-content {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 0 10px;
+  }
+  .gallery-section img,
+  .gallery-section video {
+    max-width: 100%;
+  }
+}
