@@ -238,8 +238,55 @@ body {
   width: 100%;
   height: auto;
   background: #eee;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.gallery-section img:hover,
+.gallery-section video:hover {
+  box-shadow: 0 8px 32px rgba(255,179,71,0.18);
+  transform: scale(1.04);
 }
 
+/* Modal/Lightbox Styles */
+#modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+#modalContent {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+#modalBody img {
+  max-width: 80vw;
+  max-height: 80vh;
+  border-radius: 12px;
+}
+#modalClose {
+  position: absolute;
+  top: 10px; right: 10px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Video controls below each video */
+.gallery-section .btn {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  padding: 8px 18px;
+}
+
+/* Footer */
 .footer {
   background: #111217;
   color: #fff;
