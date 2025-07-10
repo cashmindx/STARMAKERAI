@@ -5,38 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>STARMAKER AI — Become the Star of Your Own Movie</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    /* Simple gallery styling */
-    .gallery-section .image-row,
-    .gallery-section .video-row {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    .gallery-section img,
-    .gallery-section video {
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-  </style>
 </head>
-
 <body>
-  <!-- Loading Screen -->
-  <div id="loadingScreen" class="loading-screen">
-    <div class="loading-content">
-      <div class="loading-logo">🎬</div>
-      <h2>STARMAKER AI</h2>
-      <div class="loading-bar">
-        <div class="loading-progress"></div>
-      </div>
-      <p>Initializing AI Movie Studio...</p>
-    </div>
-  </div>
-
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
@@ -50,39 +21,32 @@
         <a href="#features" class="nav-link">Features</a>
         <a href="#pricing" class="nav-link">Pricing</a>
         <button class="nav-cta">Get Started</button>
-        <button class="nav-ai-settings" onclick="app.showAISettings()">
-          <i data-lucide="settings"></i>
+        <button class="nav-ai-settings">
+          <i class="icon-settings"></i>
           AI Settings
         </button>
-      </div>
-      <div class="nav-toggle">
-        <i data-lucide="menu"></i>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section id="home" class="hero">
-    <div class="hero-background">
-      <div class="hero-particles"></div>
-      <video class="hero-video" autoplay muted loop>
-        <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
-      </video>
-    </div>
     <div class="hero-content">
       <div class="hero-text">
         <h1 class="hero-title">
-          <span class="title-line">Become the Star</span>
-          <span class="title-line">of Your Own Movie</span>
+          Become the<br>
+          Star<br>
+          of Your Own<br>
+          Movie
         </h1>
-        <p class="hero-subtitle">Transform your photos and voice into a Hollywood-worthy film with AI-powered movie magic</p>
+        <p class="hero-subtitle">
+          Transform your photos and voice into a Hollywood-worthy film with AI-powered movie magic
+        </p>
         <div class="hero-actions">
           <button class="btn btn-primary" id="startJourneyBtn">
-            <i data-lucide="play"></i>
             Start Your Journey
           </button>
           <button class="btn btn-secondary" id="watchDemoBtn">
-            <i data-lucide="video"></i>
             Watch Demo
           </button>
         </div>
@@ -92,7 +56,7 @@
           <div class="preview-screen">
             <div class="preview-content">
               <div class="actor-placeholder">
-                <i data-lucide="user"></i>
+                <span style="font-size:2rem;">&#128100;</span>
               </div>
               <div class="movie-info">
                 <h3>Your Movie Title</h3>
@@ -101,9 +65,9 @@
             </div>
           </div>
           <div class="preview-controls">
-            <button class="control-btn"><i data-lucide="play"></i></button>
-            <button class="control-btn"><i data-lucide="volume-2"></i></button>
-            <button class="control-btn"><i data-lucide="maximize"></i></button>
+            <button class="control-btn">&#9654;</button>
+            <button class="control-btn">&#128266;</button>
+            <button class="control-btn">&#9974;</button>
           </div>
         </div>
       </div>
@@ -120,306 +84,86 @@
       <div class="media-gallery">
         <h3>Images</h3>
         <div class="image-row">
-          <img src="images/photo1.jpg" alt="Photo 1" width="300">
-          <img src="images/photo2.jpg" alt="Photo 2" width="300">
-          <!-- Add more images as needed -->
+          <img src="Videos/comedy.png" alt="Comedy Poster" width="300">
+          <img src="Videos/horror.png" alt="Horror Poster" width="300">
+          <img src="Videos/romance.png" alt="Romance Poster" width="300">
+          <img src="Videos/scifi.png" alt="Sci-Fi Poster" width="300">
         </div>
         <h3>Videos</h3>
         <div class="video-row">
           <video width="320" controls>
-            <source src="videos/movie1.mp4" type="video/mp4">
+            <source src="Videos/adventure-movie.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
           <video width="320" controls>
-            <source src="videos/movie2.mp4" type="video/mp4">
+            <source src="Videos/horror-movie.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-          <!-- Add more videos as needed -->
+          <video width="320" controls>
+            <source src="Videos/romance.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <video width="320" controls>
+            <source src="Videos/scifi.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
-  <section id="how-it-works" class="how-it-works">
+  <!-- Footer -->
+  <footer class="footer">
     <div class="container">
-      <div class="section-header">
-        <h2>How It Works</h2>
-        <p>Three simple steps to create your masterpiece</p>
-      </div>
-      <div class="steps-container">
-        <div class="step" data-step="1">
-          <div class="step-icon">
-            <i data-lucide="camera"></i>
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <span class="logo-icon">🎬</span>
+            <span class="logo-text">STARMAKER AI</span>
           </div>
-          <h3>Upload Photos</h3>
-          <p>Upload 3-5 clear photos of yourself from different angles</p>
-          <div class="step-demo">
-            <div class="photo-grid">
-              <div class="photo-slot" data-slot="1">
-                <i data-lucide="plus"></i>
-                <span>Front</span>
-              </div>
-              <div class="photo-slot" data-slot="2">
-                <i data-lucide="plus"></i>
-                <span>Side</span>
-              </div>
-              <div class="photo-slot" data-slot="3">
-                <i data-lucide="plus"></i>
-                <span>Smile</span>
-              </div>
-            </div>
+          <p>Transform your photos into Hollywood-worthy movies with AI-powered technology.</p>
+          <div class="social-links">
+            <a href="#"><span>Twitter</span></a>
+            <a href="#"><span>Instagram</span></a>
+            <a href="#"><span>YouTube</span></a>
+            <a href="#"><span>Facebook</span></a>
           </div>
         </div>
-        <div class="step" data-step="2">
-          <div class="step-icon">
-            <i data-lucide="mic"></i>
-          </div>
-          <h3>Record Voice</h3>
-          <p>Speak a few lines to clone your voice and emotions</p>
-          <div class="step-demo">
-            <div class="voice-recorder">
-              <div class="recorder-visual">
-                <div class="waveform">
-                  <div class="wave-bar"></div>
-                  <div class="wave-bar"></div>
-                  <div class="wave-bar"></div>
-                  <div class="wave-bar"></div>
-                  <div class="wave-bar"></div>
-                </div>
-              </div>
-              <button class="record-btn">
-                <i data-lucide="mic"></i>
-              </button>
-              <p>Tap to record</p>
-            </div>
-          </div>
-        </div>
-        <div class="step" data-step="3">
-          <div class="step-icon">
-            <i data-lucide="film"></i>
-          </div>
-          <h3>Choose Genre</h3>
-          <p>Select your movie genre and watch AI create your story</p>
-          <div class="step-demo">
-            <div class="genre-selector">
-              <div class="genre-option" data-genre="action">
-                <span>🎬</span>
-                <span>Action</span>
-              </div>
-              <div class="genre-option" data-genre="romance">
-                <span>💕</span>
-                <span>Romance</span>
-              </div>
-              <div class="genre-option" data-genre="comedy">
-                <span>😂</span>
-                <span>Comedy</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Studio Section -->
-  <section id="studio" class="studio-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>AI Movie Studio</h2>
-        <p>Experience the magic of AI-powered filmmaking</p>
-      </div>
-      <div class="studio-workspace">
-        <div class="workspace-panel left-panel">
-          <div class="panel-header">
-            <h3>Upload Your Content</h3>
-          </div>
-          <div class="upload-area" id="uploadArea">
-            <div class="upload-content">
-              <i data-lucide="upload-cloud"></i>
-              <h4>Drop your photos here</h4>
-              <p>or click to browse</p>
-              <input type="file" id="photoUpload" multiple accept="image/*" hidden>
-            </div>
-          </div>
-          <div class="uploaded-photos" id="uploadedPhotos"></div>
-        </div>
-        <div class="workspace-panel center-panel">
-          <div class="panel-header">
-            <h3>Movie Preview</h3>
-          </div>
-          <div class="preview-window">
-            <div class="preview-placeholder" id="previewPlaceholder">
-              <i data-lucide="play-circle"></i>
-              <p>Your movie will appear here</p>
-            </div>
-            <video id="moviePreview" controls style="display: none;">
-              <source src="" type="video/mp4">
-            </video>
-          </div>
-          <div class="preview-controls">
-            <button class="control-btn" id="playBtn"><i data-lucide="play"></i></button>
-            <button class="control-btn" id="pauseBtn"><i data-lucide="pause"></i></button>
-            <button class="control-btn" id="fullscreenBtn"><i data-lucide="maximize"></i></button>
-          </div>
-        </div>
-        <div class="workspace-panel right-panel">
-          <div class="panel-header">
-            <h3>Movie Settings</h3>
-          </div>
-          <div class="settings-content">
-            <div class="setting-group">
-              <label>Genre</label>
-              <select id="genreSelect">
-                <option value="action">Action</option>
-                <option value="romance">Romance</option>
-                <option value="comedy">Comedy</option>
-                <option value="thriller">Thriller</option>
-                <option value="sci-fi">Sci-Fi</option>
-                <option value="drama">Drama</option>
-              </select>
-            </div>
-            <div class="setting-group">
-              <label>Duration</label>
-              <select id="durationSelect">
-                <option value="30">30 seconds</option>
-                <option value="60">1 minute</option>
-                <option value="120">2 minutes</option>
-                <option value="300">5 minutes</option>
-              </select>
-            </div>
-            <div class="setting-group">
-              <label>Style</label>
-              <select id="styleSelect">
-                <option value="modern">Modern</option>
-                <option value="vintage">Vintage</option>
-                <option value="cinematic">Cinematic</option>
-                <option value="artistic">Artistic</option>
-              </select>
-            </div>
-            <button class="btn btn-primary" id="generateMovieBtn">
-              <i data-lucide="wand-2"></i>
-              Generate Movie
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section id="features" class="features">
-    <div class="container">
-      <div class="section-header">
-        <h2>Advanced Features</h2>
-        <p>Powered by cutting-edge AI technology</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="brain"></i>
-          </div>
-          <h3>AI Script Generation</h3>
-          <p>Custom movie scripts tailored to your personality and chosen genre</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="users"></i>
-          </div>
-          <h3>AI Co-stars</h3>
-          <p>Choose from a library of AI-generated actors to star alongside you</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="globe"></i>
-          </div>
-          <h3>30+ Languages</h3>
-          <p>Create movies in your native language with perfect voice dubbing</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="video"></i>
-          </div>
-          <h3>4K Quality</h3>
-          <p>Cinema-quality output with professional-grade visual effects</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="palette"></i>
-          </div>
-          <h3>Style Filters</h3>
-          <p>Apply cinematic filters and color grading to match your vision</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="share-2"></i>
-          </div>
-          <h3>Easy Sharing</h3>
-          <p>Share your masterpiece directly to social media platforms</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing Section -->
-  <section id="pricing" class="pricing">
-    <div class="container">
-      <div class="section-header">
-        <h2>Choose Your Plan</h2>
-        <p>Start creating your movie masterpiece today</p>
-      </div>
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="pricing-header">
-            <h3>Starter</h3>
-            <div class="price">
-              <span class="currency">$</span>
-              <span class="amount">9</span>
-              <span class="period">/movie</span>
-            </div>
-          </div>
-          <ul class="pricing-features">
-            <li><i data-lucide="check"></i> 1-minute movie</li>
-            <li><i data-lucide="check"></i> HD quality</li>
-            <li><i data-lucide="check"></i> Basic effects</li>
-            <li><i data-lucide="check"></i> 3 genres</li>
+        <div class="footer-section">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#">API</a></li>
           </ul>
-          <button class="btn btn-outline">Choose Starter</button>
         </div>
-        <div class="pricing-card featured">
-          <div class="pricing-badge">Most Popular</div>
-          <div class="pricing-header">
-            <h3>Pro</h3>
-            <div class="price">
-              <span class="currency">$</span>
-              <span class="amount">19</span>
-              <span class="period">/movie</span>
-            </div>
-          </div>
-          <ul class="pricing-features">
-            <li><i data-lucide="check"></i> 5-minute movie</li>
-            <li><i data-lucide="check"></i> 4K quality</li>
-            <li><i data-lucide="check"></i> Advanced effects</li>
-            <li><i data-lucide="check"></i> All genres</li>
-            <li><i data-lucide="check"></i> AI co-stars</li>
-            <li><i data-lucide="check"></i> Priority processing</li>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
           </ul>
-          <button class="btn btn-primary">Choose Pro</button>
         </div>
-        <div class="pricing-card">
-          <div class="pricing-header">
-            <h3>Studio</h3>
-            <div class="price">
-              <span class="currency">$</span>
-              <span class="amount">49</span>
-              <span class="period">/movie</span>
-            </div>
-          </div>
-          <ul class="pricing-features">
-            <li><i data-lucide="check"></i> 10-minute movie</li>
-            <li><i data-lucide="check"></i> 4K HDR quality</li>
-            <li><i data-lucide="check"></i> Premium effects</li>
-            <li><i data-lucide="check"></i> Custom scripts</li>
-            <li><i data-lucide="check"></i> Multiple scenes</li>
-            <li><i data-lucide="check"></i> 24/7 support</li>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
           </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 STARMAKER AI. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="javascript/app.js"></script>
+</body>
+</html>
