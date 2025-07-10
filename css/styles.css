@@ -1,41 +1,18 @@
-/* Reset and Base Styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
   font-family: 'Open Sans', Arial, sans-serif;
-  background: #181c24;
-  color: #f2f2f2;
+  background: #f7f8fa;
+  color: #222;
   line-height: 1.6;
-  min-height: 100vh;
-  scroll-behavior: smooth;
 }
 
-/* Modern Scrollbar */
-body::-webkit-scrollbar {
-  width: 10px;
-}
-body::-webkit-scrollbar-thumb {
-  background: #ffb347;
-  border-radius: 8px;
-}
-body::-webkit-scrollbar-track {
-  background: #181c24;
-}
-
-/* Navbar */
 .navbar {
-  background: rgba(24,28,36,0.95);
+  background: #181c24;
   color: #fff;
   padding: 16px 0;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(8px);
 }
 .nav-container {
   max-width: 1200px;
@@ -51,7 +28,6 @@ body::-webkit-scrollbar-track {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
-  letter-spacing: 2px;
 }
 .logo-icon {
   font-size: 2rem;
@@ -67,24 +43,12 @@ body::-webkit-scrollbar-track {
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s;
-  position: relative;
-}
-.nav-link::after {
-  content: '';
-  position: absolute;
-  left: 0; bottom: -4px;
-  width: 0; height: 2px;
-  background: #ffb347;
-  transition: width 0.3s;
 }
 .nav-link:hover {
   color: #ffb347;
 }
-.nav-link:hover::after {
-  width: 100%;
-}
 .nav-cta, .nav-ai-settings {
-  background: linear-gradient(90deg, #ffb347 0%, #ff6b35 100%);
+  background: #ffb347;
   color: #181c24;
   border: none;
   padding: 8px 18px;
@@ -92,49 +56,21 @@ body::-webkit-scrollbar-track {
   font-weight: 700;
   margin-left: 10px;
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(255,179,71,0.12);
-  position: relative;
-  overflow: hidden;
-}
-.nav-cta::after, .nav-ai-settings::after {
-  content: "";
-  position: absolute;
-  left: 50%; top: 50%;
-  width: 0; height: 0;
-  background: rgba(255,255,255,0.18);
-  border-radius: 100%;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s, height 0.4s;
-  z-index: 0;
-}
-.nav-cta:hover::after, .nav-ai-settings:hover::after {
-  width: 200%; height: 500%;
+  transition: background 0.2s;
 }
 .nav-cta:hover, .nav-ai-settings:hover {
-  background: linear-gradient(90deg, #ffd580 0%, #ffb347 100%);
-  box-shadow: 0 4px 16px rgba(255,179,71,0.18);
+  background: #ffd580;
 }
 .nav-toggle {
   display: none;
 }
 
-/* Hero Section with Animated Gradient */
 .hero {
   background: linear-gradient(120deg, #181c24 60%, #ffb347 100%);
-  background-size: 200% 200%;
-  animation: heroGradient 8s ease-in-out infinite;
   color: #fff;
   padding: 80px 0 60px 0;
   position: relative;
   overflow: hidden;
-  border-radius: 0 0 32px 32px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-}
-@keyframes heroGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 .hero-background {
   position: absolute;
@@ -167,280 +103,158 @@ body::-webkit-scrollbar-track {
   font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 18px;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.18);
 }
 .hero-subtitle {
   font-size: 1.2rem;
   margin-bottom: 28px;
-  color: #ffe6b3;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.12);
 }
 .hero-actions {
-  display: flex;
-  gap: 16px;
-}
-.btn {
-  padding: 12px 28px;
-  border-radius: 6px;
-  border: none;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  background: linear-gradient(90deg, #ffb347 0%, #ff6b35 100%);
-  color: #181c24;
-  box-shadow: 0 2px 8px rgba(255,179,71,0.12);
-}
-.btn::after {
-  content: "";
-  position: absolute;
-  left: 50%; top: 50%;
-  width: 0; height: 0;
-  background: rgba(255,255,255,0.18);
-  border-radius: 100%;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s, height 0.4s;
-  z-index: 0;
-}
-.btn:hover::after {
-  width: 200%; height: 500%;
-}
-.btn:hover {
-  background: linear-gradient(90deg, #ffd580 0%, #ffb347 100%);
-  box-shadow: 0 4px 16px rgba(255,179,71,0.18);
-}
-.btn-secondary {
-  background: #fff;
-  color: #181c24;
-  border: 1px solid #ffb347;
-}
-.btn-secondary:hover {
-  background: #ffb347;
-  color: #181c24;
-}
-.btn-large {
-  font-size: 1.2rem;
-  padding: 16px 36px;
-}
+  display:
+Absolutely! Here are the full old versions of both your index.html and styles.css before the modern movie-studio effects and advanced tweaks.
 
-/* Fade-in Animation for Sections */
-section {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1s forwards;
-  animation-delay: 0.2s;
-  margin-bottom: 32px;
-  border-radius: 18px;
-  box-shadow: 0 2px 24px rgba(0,0,0,0.04);
-  background: rgba(24,28,36,0.98);
-}
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
+Old index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STARMAKER AI — Become the Star of Your Own Movie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
 
-/* Gallery Section Styles */
-.gallery-section {
-  background: rgba(255,255,255,0.07);
-  padding: 60px 0 40px 0;
-  box-shadow: 0 4px 32px rgba(255,179,71,0.08);
-}
-.gallery-section .section-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-.gallery-section h2 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2.2rem;
-  color: #ffb347;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
-}
-.gallery-section p {
-  color: #ffe6b3;
-  font-size: 1.1rem;
-}
-.gallery-section h3 {
-  margin-top: 30px;
-  color: #ffb347;
-  font-size: 1.3rem;
-}
-.gallery-section .image-row,
-.gallery-section .video-row {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-  justify-content: center;
-}
-.gallery-section img,
-.gallery-section video {
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(255,179,71,0.12);
-  max-width: 320px;
-  width: 100%;
-  height: auto;
-  background: #eee;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.gallery-section img:hover,
-.gallery-section video:hover {
-  transform: translateY(-8px) scale(1.04);
-  box-shadow: 0 8px 32px rgba(255,179,71,0.18);
-}
+<body>
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-logo">🎬</div>
+      <h2>STARMAKER AI</h2>
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+      </div>
+      <p>Initializing AI Movie Studio...</p>
+    </div>
+  </div>
 
-/* Upload Preview Styles */
-.uploaded-photos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-.uploaded-photos img {
-  max-width: 120px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(255,179,71,0.12);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.uploaded-photos img:hover {
-  transform: scale(1.08) rotate(-2deg);
-  box-shadow: 0 8px 32px rgba(255,179,71,0.18);
-}
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-icon">🎬</span>
+        <span class="logo-text">STARMAKER AI</span>
+      </div>
+      <div class="nav-menu">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <button class="nav-cta">Get Started</button>
+        <button class="nav-ai-settings" onclick="app.showAISettings()">
+          <i data-lucide="settings"></i>
+          AI Settings
+        </button>
+      </div>
+      <div class="nav-toggle">
+        <i data-lucide="menu"></i>
+      </div>
+    </div>
+  </nav>
 
-/* Glassmorphism for Studio Panels, Features, Pricing */
-.studio-workspace, .features-grid, .pricing-grid {
-  background: rgba(255,255,255,0.13);
-  backdrop-filter: blur(8px);
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-}
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-background">
+      <div class="hero-particles"></div>
+      <video class="hero-video" autoplay muted loop>
+        <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <span class="title-line">Become the Star</span>
+          <span class="title-line">of Your Own Movie</span>
+        </h1>
+        <p class="hero-subtitle">Transform your photos and voice into a Hollywood-worthy film with AI-powered movie magic</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="startJourneyBtn">
+            <i data-lucide="play"></i>
+            Start Your Journey
+          </button>
+          <button class="btn btn-secondary" id="watchDemoBtn">
+            <i data-lucide="video"></i>
+            Watch Demo
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="movie-preview">
+          <div class="preview-screen">
+            <div class="preview-content">
+              <div class="actor-placeholder">
+                <i data-lucide="user"></i>
+              </div>
+              <div class="movie-info">
+                <h3>Your Movie Title</h3>
+                <p>Action • Adventure • 2024</p>
+              </div>
+            </div>
+          </div>
+          <div class="preview-controls">
+            <button class="control-btn"><i data-lucide="play"></i></button>
+            <button class="control-btn"><i data-lucide="volume-2"></i></button>
+            <button class="control-btn"><i data-lucide="maximize"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-/* Section headers */
-.section-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-.section-header h2 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2rem;
-  color: #ffb347;
-  margin-bottom: 8px;
-}
-.section-header p {
-  color: #ffe6b3;
-  font-size: 1.1rem;
-}
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Gallery</h2>
+        <p>Check out our images and videos!</p>
+      </div>
+      <div class="media-gallery">
+        <h3>Images</h3>
+        <div class="image-row">
+          <img src="Videos/comedy.png" alt="Comedy Poster" width="300">
+          <img src="Videos/horror.png" alt="Horror Poster" width="300">
+          <img src="Videos/romance.png" alt="Romance Poster" width="300">
+          <img src="Videos/scifi.png" alt="Sci-Fi Poster" width="300">
+        </div>
+        <h3>Videos</h3>
+        <div class="video-row">
+          <video width="320" controls>
+            <source src="Videos/adventure-movie.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <video width="320" controls>
+            <source src="Videos/horror-movie.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <video width="320" controls>
+            <source src="Videos/romance.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <video width="320" controls>
+            <source src="Videos/scifi.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
 
-/* Container */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
+  <!-- How It Works Section -->
+  <!-- ... (rest of your sections remain unchanged) ... -->
 
-/* Footer */
-.footer {
-  background: rgba(24,28,36,0.98);
-  color: #fff;
-  padding: 40px 0 20px 0;
-  border-radius: 32px 32px 0 0;
-  box-shadow: 0 -4px 32px rgba(255,179,71,0.08);
-}
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto 20px auto;
-  padding: 0 24px;
-}
-.footer-section {
-  flex: 1 1 180px;
-  min-width: 180px;
-}
-.footer-logo {
-  display: flex;
-  align-items: center;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
-}
-.footer-section h4 {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-  color: #ffb347;
-}
-.footer-section ul {
-  list-style: none;
-}
-.footer-section ul li {
-  margin-bottom: 8px;
-}
-.footer-section ul li a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.footer-section ul li a:hover {
-  color: #ffb347;
-}
-.social-links {
-  margin-top: 12px;
-  display: flex;
-  gap: 12px;
-}
-.social-links a {
-  color: #fff;
-  font-size: 1.3rem;
-  transition: color 0.2s, transform 0.2s;
-}
-.social-links a:hover {
-  color: #ffb347;
-  transform: scale(1.2) rotate(-8deg);
-}
-.footer-bottom {
-  text-align: center;
-  color: #ffe6b3;
-  font-size: 0.95rem;
-  margin-top: 20px;
-}
-
-/* Responsive Design */
-@media (max-width: 900px) {
-  .hero-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 40px;
-  }
-  .footer-content {
-    flex-direction: column;
-    gap: 24px;
-  }
-}
-@media (max-width: 600px) {
-  .container {
-    padding: 0 10px;
-  }
-  .gallery-section img,
-  .gallery-section video {
-    max-width: 100%;
-  }
-  section {
-    border-radius: 0;
-  }
-  .footer {
-    border-radius: 0;
-  }
-}
+  <!-- Scripts -->
+  <script src="javascript/ai-service.js"></script>
+  <script src="javascript/video-service.js"></script>
+  <script src="javascript/payment-service.js"></script>
+  <script src="javascript/app.js"></script>
+</body>
+</html>
