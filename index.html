@@ -2,159 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>STARMAKER AI — Become the Star of Your Own Movie</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background: #0b0b0c;
-      color: #f2f2f2;
-      overflow-x: hidden;
-    }
-    header, section {
-      padding: 80px 20px;
-      text-align: center;
-    }
-    h1, h2, h3 {
-      font-family: 'Orbitron', sans-serif;
-      text-transform: uppercase;
-    }
-    h1 {
-      font-size: 3em;
-      color: #fff;
-    }
-    h2 {
-      color: #ff004f;
-    }
-    .btn {
-      background: #ff004f;
-      color: white;
-      border: none;
-      padding: 15px 25px;
-      margin: 10px;
-      font-size: 1.1em;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: 0.3s ease;
-    }
-    .btn:hover {
-      background: #e60045;
-    }
-    .feature-icons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
-      margin-top: 30px;
-    }
-    .icon-block {
-      width: 180px;
-    }
-    .icon-block svg {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
-      color: #ff004f;
-    }
-    footer {
-      padding: 30px;
-      text-align: center;
-      font-size: 0.9em;
-      color: #aaa;
-      background: #121212;
-    }
-    .bg-video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.1;
-      z-index: -1;
-    }
-  </style>
 </head>
-
 <body>
 
-  <!-- HERO -->
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="bg-video" id="bgVideo">
+    <source src="public/videos/hero-bg.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- HERO SECTION -->
   <header>
     <h1>🎥 STARMAKER AI</h1>
     <h2>Become the Star of Your Own Movie</h2>
     <p>"Have you ever dreamed of being the hero in your own movie? Now you can."</p>
-    <div>
-      <button class="btn">📸 Upload Your Photo</button>
-      <button class="btn">🎤 Record Your Voice</button>
-      <button class="btn">🎞️ Choose Your Movie</button>
+    <div class="buttons">
+      <button class="btn" id="uploadBtn">📸 Upload Your Photo</button>
+      <button class="btn" id="recordBtn">🎤 Record Your Voice</button>
+      <button class="btn" id="chooseBtn">🎞️ Choose Your Movie</button>
     </div>
   </header>
 
-  <!-- HOW IT WORKS -->
-  <section>
+  <!-- HOW IT WORKS SECTION -->
+  <section class="how-it-works">
     <h2>How It Works</h2>
-    <h3>Step 1: Upload Your Photos</h3>
-    <p>Snap or upload a few expressive photos — front, side, smiling.</p>
+    <div class="steps">
 
-    <h3>Step 2: Record Your Voice</h3>
-    <p>Say one line. Our AI clones your tone and emotion in seconds.</p>
+      <div class="step">
+        <img src="public/images/step1-upload.jpg" alt="Upload Photos" />
+        <h3>Step 1: Upload Your Photos</h3>
+        <p>Snap or upload a few expressive photos — front, side, smiling.</p>
+      </div>
 
-    <h3>Step 3: Choose Your Genre</h3>
-    <p>Action. Romance. Thriller. Comedy. Horror. You decide the story.</p>
-  </section>
+      <div class="step">
+        <img src="public/images/step2-voice.jpg" alt="Record Voice" />
+        <h3>Step 2: Record Your Voice</h3>
+        <p>Say one line. Our AI clones your tone and emotion in seconds.</p>
+      </div>
 
-  <!-- AI MAGIC -->
-  <section>
-    <h2>AI Movie Magic</h2>
-    <p>Behind the scenes, Starmaker AI transforms your images into Hollywood-level movie scenes with real actors, face mapping, voice dubbing, and special effects.</p>
-  </section>
+      <div class="step">
+        <img src="public/images/step3-genre.jpg" alt="Choose Genre" />
+        <h3>Step 3: Choose Your Genre</h3>
+        <p>Action. Romance. Thriller. Comedy. Horror. You decide the story.</p>
+      </div>
 
-  <!-- FEATURES -->
-  <section>
-    <h2>Bonus Features</h2>
-    <div class="feature-icons">
-      <div class="icon-block">
-        <i data-lucide="brain"></i>
-        <p>AI-Generated Movie Script</p>
-      </div>
-      <div class="icon-block">
-        <i data-lucide="users"></i>
-        <p>Choose AI Co-stars</p>
-      </div>
-      <div class="icon-block">
-        <i data-lucide="globe"></i>
-        <p>30+ Languages</p>
-      </div>
-      <div class="icon-block">
-        <i data-lucide="video"></i>
-        <p>4K Movie Quality</p>
-      </div>
-      <div class="icon-block">
-        <i data-lucide="palette"></i>
-        <p>Cinematic Mood Filters</p>
-      </div>
     </div>
   </section>
 
-  <!-- CALL TO ACTION -->
-  <section>
-    <h2>Your Story Starts Now</h2>
-    <p>“The world’s waiting for your movie moment.”</p>
-    <button class="btn">🚀 Get Started Now</button>
+  <!-- FEATURES SECTION -->
+  <section class="features">
+    <h2>Bonus Features</h2>
+    <div class="feature-icons">
+      <div class="icon-block"><i data-lucide="brain"></i><p>AI-Generated Movie Script</p></div>
+      <div class="icon-block"><i data-lucide="users"></i><p>Choose AI Co-stars</p></div>
+      <div class="icon-block"><i data-lucide="globe"></i><p>30+ Languages</p></div>
+      <div class="icon-block"><i data-lucide="video"></i><p>4K Movie Quality</p></div>
+      <div class="icon-block"><i data-lucide="palette"></i><p>Cinematic Mood Filters</p></div>
+    </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- CTA SECTION -->
+  <section class="cta">
+    <h2>Your Story Starts Now</h2>
+    <p>“The world’s waiting for your movie moment.”</p>
+    <button class="btn cta-btn" id="getStartedBtn">🚀 Get Started Now</button>
+  </section>
+
   <footer>
     🌐 100% Secure | Powered by OpenAI + Sora | No Data Shared  
     <br />Contact: info@starmakerai.com
   </footer>
 
-  <!-- Lucide Icons -->
-  <script>
-    lucide.createIcons();
-  </script>
-
+  <script src="app.js"></script>
+  <script>lucide.createIcons();</script>
 </body>
 </html>
