@@ -1,115 +1,62 @@
-// Smooth scroll for navigation links
+// AI Movie Creation
 document.addEventListener('DOMContentLoaded', function() {
-  // Smooth scroll for nav links
-  document.querySelectorAll('a.nav-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop - 60,
-            behavior: 'smooth'
-          });
-        }
-      }
-    });
-  });
-
-  // Button click feedback
-  const startBtn = document.getElementById('startJourneyBtn');
-  if (startBtn) {
-    startBtn.addEventListener('click', function() {
-      alert('Start Your Journey clicked!');
-    });
-  }
-  const demoBtn = document.getElementById('watchDemoBtn');
-  if (demoBtn) {
-    demoBtn.addEventListener('click', function() {
-      alert('Watch Demo clicked!');
-    });
+  const aiService = new AIService();
+  
+  // Initialize AI service when Firebase is ready
+  if (window.firebase) {
+    aiService.initialize(window.firebase.app());
   }
 
-  // Modal logic for gallery lightbox
-  let modal = document.getElementById('modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'modal';
-    modal.style.display = 'none';
-    modal.style.position = 'fixed';
-    modal.style.top = 0;
-    modal.style.left = 0;
-    modal.style.width = '100vw';
-    modal.style.height = '100vh';
-    modal.style.background = 'rgba(0,0,0,0.85)';
-    modal.style.justifyContent = 'center';
-    modal.style.alignItems = 'center';
-    modal.style.zIndex = 9999;
-    modal.innerHTML = `
-      <div id="modalContent" style="position:relative;max-width:90vw;max-height:90vh;">
-        <button id="modalClose" style="position:absolute;top:10px;right:10px;font-size:2rem;background:none;border:none;color:#fff;cursor:pointer;">&times;</button>
-        <div id="modalBody" style="display:flex;justify-content:center;align-items:center;"></div>
-      </div>
-    `;
-    document.body.appendChild(modal);
-  }
+  // Generate script button
+  document.getElementById('generateScriptBtn')?.addEventListener('click', async function() {
+    const movieTitle = document.getElementById('movieTitle').value;
+    const genre = document.getElementById('movieGenre').value;
+    const duration = document.getElementById('movieDuration').value;
+    const personality = document.getElementById('userPersonality').value;
 
-  // Open image in modal/lightbox
-  document.querySelectorAll('.gallery-section img').forEach(img => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', function() {
-      const modalBody = document.getElementById('modalBody');
-      modalBody.innerHTML = `<img src="${img.src}" alt="${img.alt}" style="max-width:80vw;max-height:80vh;border-radius:12px;">`;
-      modal.style.display = 'flex';
-    });
+    if (!movieTitle || !genre || !duration) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    try {
+      this.textContent = 'Generating...';
+      this.disabled = true;
+
+      const result = await aiService.generateScript(genre, duration, personality, movieTitle);
+      
+      document.getElementById('scriptContent').innerHTML = result.script.replace(/\n/g, '<br>');
+      document.getElementById('scriptResult').style.display = 'block';
+      
+      this.textContent = 'Generate Movie Script';
+      this.disabled = false;
+    } catch (error) {
+      alert('Failed to generate script: ' + error.message);
+      this.textContent = 'Generate Movie Script';
+      this.disabled = false;
+    }
   });
 
-  // Modal close logic
-  document.getElementById('modalClose').addEventListener('click', function() {
-    modal.style.display = 'none';
-  });
-  // Close modal on background click
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal) modal.style.display = 'none';
-  });
+  // Generate voice button
+  document.getElementById('generateVoiceBtn')?.addEventListener('click', async function() {
+    const scriptText = document.getElementById('scriptContent').textContent;
+    
+    try {
+      this.textContent = 'Generating Voice...';
+      this.disabled = true;
 
-  // Video controls: add play/pause/fullscreen buttons below each video
-  document.querySelectorAll('.gallery-section video').forEach(video => {
-    // Create controls container
-    const controls = document.createElement('div');
-    controls.style.display = 'flex';
-    controls.style.justifyContent = 'center';
-    controls.style.gap = '10px';
-    controls.style.margin = '8px 0';
-
-    // Play button
-    const playBtn = document.createElement('button');
-    playBtn.textContent = 'Play';
-    playBtn.className = 'btn btn-secondary';
-    playBtn.onclick = () => video.play();
-
-    // Pause button
-    const pauseBtn = document.createElement('button');
-    pauseBtn.textContent = 'Pause';
-    pauseBtn.className = 'btn btn-secondary';
-    pauseBtn.onclick = () => video.pause();
-
-    // Fullscreen button
-    const fsBtn = document.createElement('button');
-    fsBtn.textContent = 'Fullscreen';
-    fsBtn.className = 'btn btn-secondary';
-    fsBtn.onclick = () => {
-      if (video.requestFullscreen) video.requestFullscreen();
-      else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
-      else if (video.msRequestFullscreen) video.msRequestFullscreen();
-    };
-
-    controls.appendChild(playBtn);
-    controls.appendChild(pauseBtn);
-    controls.appendChild(fsBtn);
-
-    // Insert controls after video
-    video.parentNode.insertBefore(controls, video.nextSibling);
+      const result = await aiService.generateVoice(scriptText, 'narrator', 'Main Character');
+      
+      // Convert base64 to audio and play
+      const audio = new Audio('data:audio/mpeg;base64,' + result.audioData);
+      audio.play();
+      
+      this.textContent = 'Generate Voice';
+      this.disabled = false;
+    } catch (error) {
+      alert('Failed to generate voice: ' + error.message);
+      this.textContent = 'Generate Voice';
+      this.disabled = false;
+    }
   });
 });
