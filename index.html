@@ -7,6 +7,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Simple gallery styling */
+    .gallery-section .image-row,
+    .gallery-section .video-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .gallery-section img,
+    .gallery-section video {
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 
 <body>
@@ -29,17 +44,17 @@
         <span class="logo-icon">🎬</span>
         <span class="logo-text">STARMAKER AI</span>
       </div>
-              <div class="nav-menu">
-          <a href="#home" class="nav-link">Home</a>
-          <a href="#how-it-works" class="nav-link">How It Works</a>
-          <a href="#features" class="nav-link">Features</a>
-          <a href="#pricing" class="nav-link">Pricing</a>
-          <button class="nav-cta">Get Started</button>
-          <button class="nav-ai-settings" onclick="app.showAISettings()">
-            <i data-lucide="settings"></i>
-            AI Settings
-          </button>
-        </div>
+      <div class="nav-menu">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <button class="nav-cta">Get Started</button>
+        <button class="nav-ai-settings" onclick="app.showAISettings()">
+          <i data-lucide="settings"></i>
+          AI Settings
+        </button>
+      </div>
       <div class="nav-toggle">
         <i data-lucide="menu"></i>
       </div>
@@ -90,6 +105,36 @@
             <button class="control-btn"><i data-lucide="volume-2"></i></button>
             <button class="control-btn"><i data-lucide="maximize"></i></button>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Gallery</h2>
+        <p>Check out our images and videos!</p>
+      </div>
+      <div class="media-gallery">
+        <h3>Images</h3>
+        <div class="image-row">
+          <img src="images/photo1.jpg" alt="Photo 1" width="300">
+          <img src="images/photo2.jpg" alt="Photo 2" width="300">
+          <!-- Add more images as needed -->
+        </div>
+        <h3>Videos</h3>
+        <div class="video-row">
+          <video width="320" controls>
+            <source src="videos/movie1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <video width="320" controls>
+            <source src="videos/movie2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <!-- Add more videos as needed -->
         </div>
       </div>
     </div>
@@ -465,9 +510,9 @@
   </div>
 
   <!-- Scripts -->
-      <script src="javascript/ai-service.js"></script>
-    <script src="javascript/video-service.js"></script>
-    <script src="javascript/payment-service.js"></script>
-    <script src="javascript/app.js"></script>
+  <script src="javascript/ai-service.js"></script>
+  <script src="javascript/video-service.js"></script>
+  <script src="javascript/payment-service.js"></script>
+  <script src="javascript/app.js"></script>
 </body>
 </html>
