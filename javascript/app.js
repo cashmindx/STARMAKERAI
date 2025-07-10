@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (moviePreview && playBtn && pauseBtn && fullscreenBtn) {
     playBtn.addEventListener('click', function() {
       moviePreview.style.display = 'block';
-      previewPlaceholder.style.display = 'none';
+      if (previewPlaceholder) previewPlaceholder.style.display = 'none';
       moviePreview.play();
     });
     pauseBtn.addEventListener('click', function() {
@@ -82,5 +82,40 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
   if (window.lucide) {
     window.lucide.createIcons();
+  }
+});
+
+// ===== Image Upload Preview =====
+document.addEventListener('DOMContentLoaded', function() {
+  const photoUpload = document.getElementById('photoUpload');
+  const uploadedPhotos = document.getElementById('uploadedPhotos');
+  const uploadArea = document.getElementById('uploadArea');
+
+  // Show file dialog when clicking the upload area
+  if (uploadArea && photoUpload) {
+    uploadArea.addEventListener('click', () => photoUpload.click());
+  }
+
+  // Handle file selection
+  if (photoUpload && uploadedPhotos) {
+    photoUpload.addEventListener('change', function() {
+      uploadedPhotos.innerHTML = ''; // Clear previous previews
+      Array.from(photoUpload.files).forEach(file => {
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.alt = file.name;
+            img.style.maxWidth = '120px';
+            img.style.margin = '8px';
+            img.style.borderRadius = '8px';
+            img.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            uploadedPhotos.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
   }
 });
