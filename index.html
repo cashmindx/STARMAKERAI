@@ -7,6 +7,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Simple gallery styling */
+    .gallery-section .image-row,
+    .gallery-section .video-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .gallery-section img,
+    .gallery-section video {
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 
 <body>
@@ -105,41 +120,224 @@
       <div class="media-gallery">
         <h3>Images</h3>
         <div class="image-row">
-          <img src="Videos/comedy.png" alt="Comedy Poster" width="300">
-          <img src="Videos/horror.png" alt="Horror Poster" width="300">
-          <img src="Videos/romance.png" alt="Romance Poster" width="300">
-          <img src="Videos/scifi.png" alt="Sci-Fi Poster" width="300">
+          <img src="images/photo1.jpg" alt="Photo 1" width="300">
+          <img src="images/photo2.jpg" alt="Photo 2" width="300">
+          <!-- Add more images as needed -->
         </div>
         <h3>Videos</h3>
         <div class="video-row">
           <video width="320" controls>
-            <source src="Videos/adventure-movie.mp4" type="video/mp4">
+            <source src="videos/movie1.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
           <video width="320" controls>
-            <source src="Videos/horror-movie.mp4" type="video/mp4">
+            <source src="videos/movie2.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-          <video width="320" controls>
-            <source src="Videos/romance.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <video width="320" controls>
-            <source src="Videos/scifi.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+          <!-- Add more videos as needed -->
         </div>
       </div>
     </div>
   </section>
 
   <!-- How It Works Section -->
-  <!-- ... (rest of your sections remain unchanged) ... -->
+  <section id="how-it-works" class="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>Three simple steps to create your masterpiece</p>
+      </div>
+      <div class="steps-container">
+        <div class="step" data-step="1">
+          <div class="step-icon">
+            <i data-lucide="camera"></i>
+          </div>
+          <h3>Upload Photos</h3>
+          <p>Upload 3-5 clear photos of yourself from different angles</p>
+          <div class="step-demo">
+            <div class="photo-grid">
+              <div class="photo-slot" data-slot="1">
+                <i data-lucide="plus"></i>
+                <span>Front</span>
+              </div>
+              <div class="photo-slot" data-slot="2">
+                <i data-lucide="plus"></i>
+                <span>Side</span>
+              </div>
+              <div class="photo-slot" data-slot="3">
+                <i data-lucide="plus"></i>
+                <span>Smile</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-icon">
+            <i data-lucide="mic"></i>
+          </div>
+          <h3>Record Voice</h3>
+          <p>Speak a few lines to clone your voice and emotions</p>
+          <div class="step-demo">
+            <div class="voice-recorder">
+              <div class="recorder-visual">
+                <div class="waveform">
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                  <div class="wave-bar"></div>
+                </div>
+              </div>
+              <button class="record-btn">
+                <i data-lucide="mic"></i>
+              </button>
+              <p>Tap to record</p>
+            </div>
+          </div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-icon">
+            <i data-lucide="film"></i>
+          </div>
+          <h3>Choose Genre</h3>
+          <p>Select your movie genre and watch AI create your story</p>
+          <div class="step-demo">
+            <div class="genre-selector">
+              <div class="genre-option" data-genre="action">
+                <span>🎬</span>
+                <span>Action</span>
+              </div>
+              <div class="genre-option" data-genre="romance">
+                <span>💕</span>
+                <span>Romance</span>
+              </div>
+              <div class="genre-option" data-genre="comedy">
+                <span>😂</span>
+                <span>Comedy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Scripts -->
-  <script src="javascript/ai-service.js"></script>
-  <script src="javascript/video-service.js"></script>
-  <script src="javascript/payment-service.js"></script>
-  <script src="javascript/app.js"></script>
-</body>
-</html>
+  <!-- Interactive Studio Section -->
+  <section id="studio" class="studio-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>AI Movie Studio</h2>
+        <p>Experience the magic of AI-powered filmmaking</p>
+      </div>
+      <div class="studio-workspace">
+        <div class="workspace-panel left-panel">
+          <div class="panel-header">
+            <h3>Upload Your Content</h3>
+          </div>
+          <div class="upload-area" id="uploadArea">
+            <div class="upload-content">
+              <i data-lucide="upload-cloud"></i>
+              <h4>Drop your photos here</h4>
+              <p>or click to browse</p>
+              <input type="file" id="photoUpload" multiple accept="image/*" hidden>
+            </div>
+          </div>
+          <div class="uploaded-photos" id="uploadedPhotos"></div>
+        </div>
+        <div class="workspace-panel center-panel">
+          <div class="panel-header">
+            <h3>Movie Preview</h3>
+          </div>
+          <div class="preview-window">
+            <div class="preview-placeholder" id="previewPlaceholder">
+              <i data-lucide="play-circle"></i>
+              <p>Your movie will appear here</p>
+            </div>
+            <video id="moviePreview" controls style="display: none;">
+              <source src="" type="video/mp4">
+            </video>
+          </div>
+          <div class="preview-controls">
+            <button class="control-btn" id="playBtn"><i data-lucide="play"></i></button>
+            <button class="control-btn" id="pauseBtn"><i data-lucide="pause"></i></button>
+            <button class="control-btn" id="fullscreenBtn"><i data-lucide="maximize"></i></button>
+          </div>
+        </div>
+        <div class="workspace-panel right-panel">
+          <div class="panel-header">
+            <h3>Movie Settings</h3>
+          </div>
+          <div class="settings-content">
+            <div class="setting-group">
+              <label>Genre</label>
+              <select id="genreSelect">
+                <option value="action">Action</option>
+                <option value="romance">Romance</option>
+                <option value="comedy">Comedy</option>
+                <option value="thriller">Thriller</option>
+                <option value="sci-fi">Sci-Fi</option>
+                <option value="drama">Drama</option>
+              </select>
+            </div>
+            <div class="setting-group">
+              <label>Duration</label>
+              <select id="durationSelect">
+                <option value="30">30 seconds</option>
+                <option value="60">1 minute</option>
+                <option value="120">2 minutes</option>
+                <option value="300">5 minutes</option>
+              </select>
+            </div>
+            <div class="setting-group">
+              <label>Style</label>
+              <select id="styleSelect">
+                <option value="modern">Modern</option>
+                <option value="vintage">Vintage</option>
+                <option value="cinematic">Cinematic</option>
+                <option value="artistic">Artistic</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="generateMovieBtn">
+              <i data-lucide="wand-2"></i>
+              Generate Movie
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Advanced Features</h2>
+        <p>Powered by cutting-edge AI technology</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="brain"></i>
+          </div>
+          <h3>AI Script Generation</h3>
+          <p>Custom movie scripts tailored to your personality and chosen genre</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="users"></i>
+          </div>
+          <h3>AI Co-stars</h3>
+          <p>Choose from a library of AI-generated actors to star alongside you</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="globe"></i>
+          </div>
+          <h3>30+ Languages</h3>
+          <p>Create movies in your native language with perfect voice dubbing</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="video"></i>
+          </div>
+          <h3>4K
