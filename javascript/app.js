@@ -34,6 +34,7 @@ class StarmakerAI {
     this.initializeAIService();
     this.initializeVideoService();
     this.initializePaymentService();
+    this.initializeAuth(); // Initialize authentication
   }
 
   setupEventListeners() {
@@ -905,6 +906,91 @@ class StarmakerAI {
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
     };
+  }
+
+  // Initialize authentication
+  initializeAuth() {
+    // Add auth form event listeners
+    const signInForm = document.getElementById('signInForm');
+    const signUpForm = document.getElementById('signUpForm');
+
+    if (signInForm) {
+      signInForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('signInEmail').value;
+        const password = document.getElementById('signInPassword').value;
+        
+        const result = await window.AuthService.signIn(email, password);
+        if (result.success) {
+          this.showNotification('Welcome back!', 'success');
+          window.AuthService.hideAuthModal();
+        } else {
+          this.showNotification(result.error, 'error');
+        }
+      });
+    }
+
+    if (signUpForm) {
+      signUpForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('signUpName').value;
+        const email = document.getElementById('signUpEmail').value;
+        const password = document.getElementById('signUpPassword').value;
+        
+        const result = await window.AuthService.signUp(email, password, name);
+        if (result.success) {
+          this.showNotification('Account created successfully!', 'success');
+          window.AuthService.hideAuthModal();
+        } else {
+          this.showNotification(result.error, 'error');
+        }
+      });
+    }
+
+    // Listen for auth state changes
+    if (window.AuthService) {
+      window.AuthService.onAuthStateChanged((user) => {
+        if (user) {
+          console.log('User authenticated:', user.email);
+          // Enable premium features for authenticated users
+          this.enablePremiumFeatures();
+        } else {
+          console.log('User signed out');
+          // Disable premium features
+          this.disablePremiumFeatures();
+        }
+      });
+    }
+  }
+
+  // Enable premium features for authenticated users
+  enablePremiumFeatures() {
+    const premiumButtons = document.querySelectorAll('.premium-feature');
+    premiumButtons.forEach(button => {
+      button.disabled = false;
+      button.classList.remove('disabled');
+    });
+    
+    // Show user-specific content
+    const userContent = document.querySelectorAll('.user-content');
+    userContent.forEach(content => {
+      content.style.display = 'block';
+    });
+  }
+
+  // Disable premium features for unauthenticated users
+  disablePremiumFeatures() {
+    const premiumButtons = document.querySelectorAll('.premium-feature');
+    premiumButtons.forEach(button => {
+      button.disabled = true;
+      button.classList.add('disabled');
+    });
+    
+    // Hide user-specific content
+    const userContent = document.querySelectorAll('.user-content');
+    userContent.forEach(content => {
+      content.style.display = 'none';
+    });
   }
 }
 
