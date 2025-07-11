@@ -74,6 +74,95 @@
     </div>
   </section>
 
+  <!-- Movie Creation Form Section -->
+  <section id="create" class="create-section" style="padding: 4rem 0; background: #121212;">
+    <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+      <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="color: white; margin-bottom: 1rem;">Create Your Movie</h2>
+        <p style="color: #888;">Follow the steps below to generate your personalized AI movie</p>
+      </div>
+
+      <!-- Step 1: Movie Details -->
+      <div class="creation-step" style="background: #1a1a1a; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+        <h3 style="color: #ff004f; margin-bottom: 1.5rem;">Step 1: Movie Details</h3>
+        <div style="display: grid; gap: 1rem;">
+          <div>
+            <label for="movieTitle" style="color: white; display: block; margin-bottom: 0.5rem;">Movie Title</label>
+            <input type="text" id="movieTitle" placeholder="Enter your movie title" 
+                   style="width: 100%; padding: 0.75rem; border: 1px solid #333; border-radius: 6px; background: #2a2a2a; color: white;">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div>
+              <label for="movieGenre" style="color: white; display: block; margin-bottom: 0.5rem;">Genre</label>
+              <select id="movieGenre" style="width: 100%; padding: 0.75rem; border: 1px solid #333; border-radius: 6px; background: #2a2a2a; color: white;">
+                <option value="">Select Genre</option>
+                <option value="action">Action</option>
+                <option value="romance">Romance</option>
+                <option value="comedy">Comedy</option>
+                <option value="thriller">Thriller</option>
+                <option value="scifi">Sci-Fi</option>
+                <option value="drama">Drama</option>
+              </select>
+            </div>
+            <div>
+              <label for="movieDuration" style="color: white; display: block; margin-bottom: 0.5rem;">Duration (seconds)</label>
+              <select id="movieDuration" style="width: 100%; padding: 0.75rem; border: 1px solid #333; border-radius: 6px; background: #2a2a2a; color: white;">
+                <option value="">Select Duration</option>
+                <option value="30">30 seconds</option>
+                <option value="60">1 minute</option>
+                <option value="120">2 minutes</option>
+                <option value="300">5 minutes</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="userPersonality" style="color: white; display: block; margin-bottom: 0.5rem;">Your Personality (Optional)</label>
+            <input type="text" id="userPersonality" placeholder="Describe your personality (e.g., adventurous, funny, romantic)" 
+                   style="width: 100%; padding: 0.75rem; border: 1px solid #333; border-radius: 6px; background: #2a2a2a; color: white;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Photo Upload -->
+      <div class="creation-step" style="background: #1a1a1a; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+        <h3 style="color: #ff004f; margin-bottom: 1.5rem;">Step 2: Upload Photos</h3>
+        <div>
+          <label for="photoUpload" style="color: white; display: block; margin-bottom: 0.5rem;">Choose 3-5 photos from different angles</label>
+          <input type="file" id="photoUpload" multiple accept="image/*" 
+                 style="width: 100%; padding: 0.75rem; border: 1px solid #333; border-radius: 6px; background: #2a2a2a; color: white;">
+        </div>
+      </div>
+
+      <!-- Step 3: Script Generation -->
+      <div class="creation-step" style="background: #1a1a1a; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+        <h3 style="color: #ff004f; margin-bottom: 1.5rem;">Step 3: Generate Script</h3>
+        <button id="generateScriptBtn" style="width: 100%; padding: 1rem; background: #ff004f; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
+          Generate Movie Script
+        </button>
+        <div id="scriptResult" style="display: none; margin-top: 1rem; padding: 1rem; background: #2a2a2a; border-radius: 6px;">
+          <h4 style="color: white; margin-bottom: 0.5rem;">Generated Script:</h4>
+          <div id="scriptContent" style="color: #ccc; line-height: 1.6;"></div>
+        </div>
+      </div>
+
+      <!-- Step 4: Voice Generation -->
+      <div class="creation-step" style="background: #1a1a1a; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+        <h3 style="color: #ff004f; margin-bottom: 1.5rem;">Step 4: Generate Voice</h3>
+        <button id="generateVoiceBtn" style="width: 100%; padding: 1rem; background: #00d4ff; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
+          Generate Voice
+        </button>
+      </div>
+
+      <!-- Step 5: Generate Movie -->
+      <div class="creation-step" style="background: #1a1a1a; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+        <h3 style="color: #ff004f; margin-bottom: 1.5rem;">Step 5: Generate Your Movie</h3>
+        <button id="generateMovieBtn" style="width: 100%; padding: 1rem; background: #ffa500; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
+          Generate Movie
+        </button>
+      </div>
+    </div>
+  </section>
+
   <!-- Gallery Section -->
   <section id="gallery" class="gallery-section">
     <div class="container">
@@ -164,7 +253,10 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="javascript/ai-service.js"></script>
+  <script src="javascript/video-service.js"></script>
+  <script src="javascript/auth-service.js"></script>
+  <script src="javascript/payment-service.js"></script>
   <script src="javascript/app.js"></script>
 </body>
 </html>
-TA
