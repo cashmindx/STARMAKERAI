@@ -1,0 +1,25 @@
+{
+  "name": "genkit-music-generator",
+  "version": "1.0.0",
+  "description": "AI music generation flow using Google Genkit",
+  "main": "index.js",
+  "scripts": {
+    "dev": "genkit start",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@genkit-ai/ai": "^0.5.0",
+    "@genkit-ai/core": "^0.5.0",
+    "@genkit-ai/flow": "^0.5.0",
+    "@genkit-ai/googleai": "^0.5.0",
+    "genkit": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": ["genkit", "ai", "music", "generation"],
+  "author": "",
+  "license": "MIT"
+}
